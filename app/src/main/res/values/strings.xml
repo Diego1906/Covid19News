@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Covid19News</string>
+    <string name="app_name">Covid-19 News</string>
+    <string name="country">País: </string>
+    <string name="cases">Casos </string>
+    <string name="newCase">Novos: </string>
+    <string name="active">Active: </string>
+    <string name="critical">Critical: </string>
+    <string name="recovered">Recuperados: </string>
+    <string name="total">Total: </string>
+    <string name="deaths">Mortes</string>
+    <string name="newDeath">Novas: </string>
+    <string name="tests">Testes</string>
+    <string name="date">Data</string>
+    <string name="statistics">Estatísticas</string>
+    <string name="world_all">Mundo Todo</string>
+    <string name="by_country">Por País</string>
+    <string name="all_countries">Todos Países</string>
+    <string name="image_do_coronavirus">Image do coronavirus</string>
 </resources>
