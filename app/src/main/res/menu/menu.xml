@@ -7,8 +7,8 @@
             <menu>
                 <group>
                     <item
-                        android:id="@+id/worldAll"
-                        android:title="@string/world_all" />
+                        android:id="@+id/entireWorld"
+                        android:title="@string/entire_world" />
                     <item
                         android:id="@+id/byCountry"
                         android:title="@string/by_country" />

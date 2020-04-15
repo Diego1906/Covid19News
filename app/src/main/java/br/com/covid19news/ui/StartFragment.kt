@@ -2,8 +2,9 @@ package br.com.covid19news.ui
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import br.com.covid19news.R
 
 class StartFragment : Fragment() {
@@ -24,16 +25,21 @@ class StartFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-        val msg = when (item.itemId) {
-            R.id.worldAll -> "World All"
+        when (item.itemId) {
+            R.id.entireWorld -> onNavigate(
+                StartFragmentDirections.actionStartFragmentToEntireWorldFragment()
+            )
             R.id.byCountry -> "By Country"
             R.id.allCountries -> "All Countries"
             else -> null
         }
-
-        msg?.let {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-        }
+//        msg?.let {
+//            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+//        }
         return true
+    }
+
+    private fun onNavigate(directions: NavDirections) {
+        this.findNavController().navigate(directions)
     }
 }

@@ -12,7 +12,7 @@
         android:contentDescription="@string/image_do_coronavirus"
         android:padding="@dimen/dimen_8dp"
         android:src="@drawable/ic_virus"
-        android:text="@string/hello_blank_fragment"
+        android:text="@string/description_entire_world"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
