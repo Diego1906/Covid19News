@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_startFragment_to_entireWorldFragment"
             app:destination="@id/entireWorldFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_byCountryFragment"
+            app:destination="@id/byCountryFragment" />
     </fragment>
     <fragment
         android:id="@+id/entireWorldFragment"
         android:name="br.com.covid19news.ui.EntireWorldFragment"
         android:label="fragment_entire_world"
         tools:layout="@layout/fragment_entire_world" />
+    <fragment
+        android:id="@+id/byCountryFragment"
+        android:name="br.com.covid19news.ui.ByCountryFragment"
+        android:label="fragment_by_country"
+        tools:layout="@layout/fragment_by_country" />
 </navigation>

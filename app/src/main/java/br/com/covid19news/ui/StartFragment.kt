@@ -29,7 +29,9 @@ class StartFragment : Fragment() {
             R.id.entireWorld -> onNavigate(
                 StartFragmentDirections.actionStartFragmentToEntireWorldFragment()
             )
-            R.id.byCountry -> "By Country"
+            R.id.byCountry -> onNavigate(
+                StartFragmentDirections.actionStartFragmentToByCountryFragment()
+            )
             R.id.allCountries -> "All Countries"
             else -> null
         }
