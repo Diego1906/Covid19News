@@ -4,5 +4,5 @@ import br.com.covid19news.domain.DataStatisticsModel
 
 interface IRepository {
 
-    suspend fun getDataAllCountries(): DataStatisticsModel
+    suspend fun getDataAllCountries(typeSearch: String): DataStatisticsModel
 }

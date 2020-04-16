@@ -7,6 +7,6 @@ import retrofit2.http.Query
 interface IServiceAPI {
 
     @GET("statistics")
-    suspend fun getDataAllCountries(@Query("country") country: String = "all"): DataStatistics
+    suspend fun getDataAllCountries(@Query("country") country: String): DataStatistics
 
 }
