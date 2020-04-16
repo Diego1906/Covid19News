@@ -8,5 +8,4 @@ interface IServiceAPI {
 
     @GET("statistics")
     suspend fun getDataAllCountries(@Query("country") country: String): DataStatistics
-
 }
