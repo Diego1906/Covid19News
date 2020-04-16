@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.ByCountryFragment">
 
-        <include layout="@layout/item_list_news" />
+        <include layout="@layout/detail_item" />
 
     </FrameLayout>
 

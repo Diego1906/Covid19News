@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_startFragment_to_byCountryFragment"
             app:destination="@id/byCountryFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_allCountriesFragment"
+            app:destination="@id/allCountriesFragment" />
     </fragment>
     <fragment
         android:id="@+id/entireWorldFragment"
@@ -27,4 +30,9 @@
         android:name="br.com.covid19news.ui.ByCountryFragment"
         android:label="fragment_by_country"
         tools:layout="@layout/fragment_by_country" />
+    <fragment
+        android:id="@+id/allCountriesFragment"
+        android:name="br.com.covid19news.ui.AllCountriesFragment"
+        android:label="fragment_all_countries"
+        tools:layout="@layout/fragment_all_countries" />
 </navigation>

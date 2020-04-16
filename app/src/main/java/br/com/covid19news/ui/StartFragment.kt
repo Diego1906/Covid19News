@@ -32,12 +32,10 @@ class StartFragment : Fragment() {
             R.id.byCountry -> onNavigate(
                 StartFragmentDirections.actionStartFragmentToByCountryFragment()
             )
-            R.id.allCountries -> "All Countries"
-            else -> null
+            R.id.allCountries -> onNavigate(
+                StartFragmentDirections.actionStartFragmentToAllCountriesFragment()
+            )
         }
-//        msg?.let {
-//            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-//        }
         return true
     }
 
