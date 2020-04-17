@@ -1,7 +1,9 @@
 package br.com.covid19news.util
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import br.com.covid19news.R
 import br.com.covid19news.application.CovidApplication
 import java.text.SimpleDateFormat
@@ -36,7 +38,11 @@ fun String.onFormatDateTime(): String {
     return newDateFormated
 }
 
-
 fun String.removePrefix(): String {
     return this.removePrefix(CovidApplication.getContext().getString(R.string.str_plus))
+}
+
+fun Fragment.onIsNetworkConnected(): Boolean {
+    val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    return cm.activeNetworkInfo?.isConnectedOrConnecting == true
 }

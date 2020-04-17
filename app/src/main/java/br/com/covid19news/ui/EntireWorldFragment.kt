@@ -6,21 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
+import br.com.covid19news.util.onIsNetworkConnected
 import br.com.covid19news.util.onShowToast
 import br.com.covid19news.viewmodel.EntireWorldViewModel
+import kotlinx.android.synthetic.main.fragment_entire_world.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntireWorldFragment : Fragment() {
 
-    private val viewModel: EntireWorldViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        ViewModelProviders.of(this, EntireWorldViewModel.Factory(activity.application))
-            .get(EntireWorldViewModel::class.java)
-    }
+    private val viewModel: EntireWorldViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +27,13 @@ class EntireWorldFragment : Fragment() {
         val binding = FragmentEntireWorldBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.swipeRefreshDetail.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.onShowToast(requireContext())
+            it?.let {
+                it.onShowToast(requireContext())
+                viewModel.onShowToast(null)
+            }
         })
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
@@ -41,11 +42,24 @@ class EntireWorldFragment : Fragment() {
             }
         })
 
+        viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
+            swipeRefreshDetail.isRefreshing = it
+        })
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onShowData()
+    }
+
+    private fun onShowData() {
+        viewModel.onHideSwipeRefresh()
+        if (this.onIsNetworkConnected().not()) {
+            viewModel.onShowToast(getString(R.string.no_internet_connection))
+            return
+        }
         viewModel.onShowData(TypeSearch.ALL.value)
     }
 }

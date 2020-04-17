@@ -24,4 +24,5 @@
     <string name="quantity_not_reported">Quantidade não informada</string>
     <string name="all">Todos</string>
     <string name="str_plus">+</string>
+    <string name="no_internet_connection">Sem conexão com a internet</string>
 </resources>

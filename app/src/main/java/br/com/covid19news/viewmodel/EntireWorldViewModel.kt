@@ -2,32 +2,35 @@ package br.com.covid19news.viewmodel
 
 import android.app.Application
 import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import br.com.covid19news.domain.*
-import br.com.covid19news.remote.Service
-import br.com.covid19news.repository.Repository
+import br.com.covid19news.repository.IRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class EntireWorldViewModel(application: Application) :
+class EntireWorldViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application) {
-
-    private val repository: Repository = Repository(Service())
 
     private val _data = MutableLiveData<DataStatisticsModel>()
     val data
         get() = _data
 
-    private val _toast = MutableLiveData<String>()
+    private val _toast = MutableLiveData<String?>()
     val toast
         get() = _toast
 
-    private val _progress = MutableLiveData(View.GONE)
-    val progress
-        get() = _progress
+    private val _progressBar = MutableLiveData(View.GONE)
+    val progressBar
+        get() = _progressBar
+
+    private val _swipeIsRefreshing = MutableLiveData<Boolean>()
+    val swipeIsRefreshing
+        get() = _swipeIsRefreshing
 
     private val _cases = MutableLiveData<CasesModel>()
     val cases
@@ -64,7 +67,9 @@ class EntireWorldViewModel(application: Application) :
 
     fun onShowData(typeSearch: String) {
         viewModelScope.launch {
+            onShowProgressBar(true)
             onCallRepository(typeSearch)
+            onShowProgressBar(false)
         }
     }
 
@@ -77,7 +82,7 @@ class EntireWorldViewModel(application: Application) :
             } catch (ex: Throwable) {
                 Timber.tag(javaClass.simpleName);
                 Timber.e(ex)
-                _toast.postValue(ex.message)
+                onShowToast(ex.message)
             }
         }
     }
@@ -92,24 +97,20 @@ class EntireWorldViewModel(application: Application) :
         _time.value = _response.value?.time
     }
 
-    fun onShowProgress(value: Boolean): Int {
-        return when (value) {
-            true -> View.VISIBLE
-            else -> View.GONE
-        }
+    private fun onShowProgressBar(value: Boolean) {
+        _progressBar.postValue(onShow(value))
     }
 
+    private fun onShow(value: Boolean) = when (value) {
+        true -> View.VISIBLE
+        else -> View.GONE
+    }
 
-    /**
-     * Factory for constructing EntireWorldViewModel with parameter
-     */
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(EntireWorldViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return EntireWorldViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
+    fun onShowToast(value: String?) {
+        _toast.postValue(value)
+    }
+
+    fun onHideSwipeRefresh() {
+        _swipeIsRefreshing.value = false
     }
 }
