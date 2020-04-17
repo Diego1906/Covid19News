@@ -8,7 +8,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val appModule: Module = module {
-    // viewModel { AllCountriesViewModel(repository = get(), application = androidApplication()) }
+    // viewModel { EntireWorldViewModel(repository = get(), application = androidApplication()) }
     single<IRepository> { Repository(service = get()) }
     single<IService> { Service() }
 }

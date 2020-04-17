@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Deaths(
     @Json(name = "new") val new: String?,
-    @Json(name = "total") val total: Int
+    @Json(name = "total") val total: String?
 ) : Parcelable

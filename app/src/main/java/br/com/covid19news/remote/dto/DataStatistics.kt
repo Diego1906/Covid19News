@@ -6,10 +6,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataStatistics(
-    @Json(name = "get") val get: String,
+    @Json(name = "get") val get: String?,
     //@Json(name = "parameters") val parameters: List<Parameters>,
     //@Json(name = "errors") val errors: List<Errors>,
-    @Json(name = "results") val results: Int,
+    @Json(name = "results") val results: String?,
     @Json(name = "response") val response: List<Response>?
 ) : Parcelable
 

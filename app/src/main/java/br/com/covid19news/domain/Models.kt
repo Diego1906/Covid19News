@@ -5,10 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataStatisticsModel(
-    val get: String,
+    val get: String?,
     //val parameters: List<ParametersModel>,
     //val errors: List<ErrorsModel>,
-    val results: Int,
+    val results: String?,
     val response: List<ResponseModel>?
 ) : Parcelable
 
@@ -25,21 +25,21 @@ data class ResponseModel(
 @Parcelize
 data class CasesModel(
     val new: String?,
-    val active: Int,
-    val critical: Int,
-    val recovered: Int,
-    val total: Int
+    val active: String?,
+    val critical: String?,
+    val recovered: String?,
+    val total: String?
 ) : Parcelable
 
 @Parcelize
 data class DeathsModel(
     val new: String?,
-    val total: Int
+    val total: String?
 ) : Parcelable
 
 @Parcelize
 data class TestsModel(
-    val total: Int?
+    val total: String?
 ) : Parcelable
 
 @Parcelize

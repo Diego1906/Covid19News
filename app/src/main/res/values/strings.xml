@@ -17,6 +17,11 @@
     <string name="by_country">Por País</string>
     <string name="all_countries">Todos Países</string>
     <string name="image_do_coronavirus">Image do coronavirus</string>
-
-    <string name="description_entire_world">As informações abaixo são referente a consolidação dos dados estatísticos do mundo inteiro.</string>
+    <string name="description_entire_world">As informações abaixo são referentes a consolidação dos dados estatísticos do mundo inteiro.</string>
+    <string name="pattern_date_api">yyyy-MM-dd\'T\'hh:mm:ss</string>
+    <string name="pattern_date_pt_br">dd.MM.yyyy HH:mm:ss</string>
+    <string name="time_zone_gmt">GMT</string>
+    <string name="quantity_not_reported">Quantidade não informada</string>
+    <string name="all">Todos</string>
+    <string name="str_plus">+</string>
 </resources>

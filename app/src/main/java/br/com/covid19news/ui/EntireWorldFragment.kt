@@ -7,36 +7,41 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import br.com.covid19news.R
+import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onShowToast
-import br.com.covid19news.viewmodel.AllCountriesViewModel
+import br.com.covid19news.viewmodel.EntireWorldViewModel
 
 class EntireWorldFragment : Fragment() {
 
-    private val viewModel: AllCountriesViewModel by lazy {
+    private val viewModel: EntireWorldViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        ViewModelProviders.of(this, AllCountriesViewModel.Factory(activity.application))
-            .get(AllCountriesViewModel::class.java)
+        ViewModelProviders.of(this, EntireWorldViewModel.Factory(activity.application))
+            .get(EntireWorldViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_entire_world, container, false)
+
+        val binding = FragmentEntireWorldBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.onShowToast(requireContext())
         })
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
-            it?.response?.get(0)?.country.toString().onShowToast(requireContext())
+            it?.let {
+                viewModel.onSortData(it)
+            }
         })
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

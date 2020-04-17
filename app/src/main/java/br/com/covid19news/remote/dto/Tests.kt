@@ -6,5 +6,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Tests(
-    @Json(name = "total") val total: Int?
+    @Json(name = "total") val total: String?
 ) : Parcelable

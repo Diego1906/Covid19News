@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Cases(
     @Json(name = "new") val new: String?,
-    @Json(name = "active") val active: Int,
-    @Json(name = "critical") val critical: Int,
-    @Json(name = "recovered") val recovered: Int,
-    @Json(name = "total") val total: Int
+    @Json(name = "active") val active: String?,
+    @Json(name = "critical") val critical: String?,
+    @Json(name = "recovered") val recovered: String?,
+    @Json(name = "total") val total: String?
 ) : Parcelable
