@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Covid-19 News</string>
-    <string name="country">País:</string>
-    <string name="countryItem">País</string>
+    <string name="country">País</string>
     <string name="cases">Casos</string>
     <string name="newCase">Novos:</string>
     <string name="active">Ativos:</string>

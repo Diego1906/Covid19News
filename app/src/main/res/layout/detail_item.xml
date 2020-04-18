@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="br.com.covid19news.viewmodel.EntireWorldViewModel" />
+            type="br.com.covid19news.viewmodel.CovidViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="133dp" />
+                app:layout_constraintGuide_begin="150dp" />
 
             <TextView
                 android:id="@+id/lblCountry"
@@ -56,7 +56,7 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toStartOf="@id/txtCountry"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide01"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -69,7 +69,7 @@
                 android:text="@{viewModel.country}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="2"
-                app:layout_constraintStart_toEndOf="@id/lblCountry"
+                app:layout_constraintStart_toEndOf="@id/guide03"
                 app:layout_constraintTop_toTopOf="@id/lblCountry"
                 app:layout_constraintVertical_weight="1"
                 tools:text="Nome do país" />
@@ -99,7 +99,7 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide01"
                 app:layout_constraintTop_toBottomOf="@id/view01" />
 
             <include
@@ -256,7 +256,7 @@
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide01"
                 app:layout_constraintTop_toBottomOf="@id/view03" />
 
             <include
@@ -344,7 +344,7 @@
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide01"
                 app:layout_constraintTop_toBottomOf="@id/view05" />
 
             <include
@@ -398,41 +398,29 @@
 
             <TextView
                 android:id="@+id/lblDate"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_16dp"
-                android:paddingStart="@dimen/dimen_8dp"
-                android:paddingTop="@dimen/dimen_8dp"
-                android:paddingEnd="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:padding="@dimen/dimen_8dp"
                 android:text="@string/date"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guide03"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/guide01"
                 app:layout_constraintTop_toBottomOf="@id/view07" />
-
-            <include
-                android:id="@+id/view08"
-                layout="@layout/view_separator"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_2dp"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
-                android:background="@color/colorGray300"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lblDate" />
 
             <TextView
                 android:id="@+id/txtDate"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_8dp"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{viewModel.response.time}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view08"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/guide03"
+                app:layout_constraintTop_toTopOf="@id/lblDate"
                 tools:text="2020-04-13T05:30:04" />
 
             <ProgressBar

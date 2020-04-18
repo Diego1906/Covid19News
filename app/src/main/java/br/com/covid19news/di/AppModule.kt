@@ -4,7 +4,7 @@ import br.com.covid19news.remote.IService
 import br.com.covid19news.remote.Service
 import br.com.covid19news.repository.IRepository
 import br.com.covid19news.repository.Repository
-import br.com.covid19news.viewmodel.EntireWorldViewModel
+import br.com.covid19news.viewmodel.CovidViewModel
 import br.com.covid19news.viewmodel.StartViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -12,7 +12,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     viewModel { StartViewModel() }
-    viewModel { EntireWorldViewModel(repository = get(), application = androidApplication()) }
+    viewModel { CovidViewModel(repository = get(), application = androidApplication()) }
     single<IRepository> { Repository(service = get()) }
     single<IService> { Service() }
 }

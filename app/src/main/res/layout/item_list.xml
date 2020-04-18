@@ -24,7 +24,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@string/countryItem"
+                android:text="@string/country"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/txtDateItem"

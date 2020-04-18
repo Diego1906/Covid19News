@@ -7,13 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.covid19news.domain.*
 import br.com.covid19news.repository.IRepository
+import br.com.covid19news.util.TypeSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class EntireWorldViewModel(val repository: IRepository, application: Application) :
+class CovidViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application) {
 
     private val _data = MutableLiveData<DataStatisticsModel>()
@@ -65,7 +66,7 @@ class EntireWorldViewModel(val repository: IRepository, application: Application
         viewModelScope.cancel()
     }
 
-    fun onShowData(typeSearch: String) {
+    fun onShowData(typeSearch: TypeSearch) {
         viewModelScope.launch {
             onShowProgressBar(true)
             onCallRepository(typeSearch)
@@ -73,7 +74,7 @@ class EntireWorldViewModel(val repository: IRepository, application: Application
         }
     }
 
-    private suspend fun onCallRepository(typeSearch: String) {
+    private suspend fun onCallRepository(typeSearch: TypeSearch) {
         withContext(Dispatchers.IO) {
             try {
                 _data.postValue(

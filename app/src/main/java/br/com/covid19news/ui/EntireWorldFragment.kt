@@ -11,13 +11,14 @@ import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onIsNetworkConnected
 import br.com.covid19news.util.onShowToast
-import br.com.covid19news.viewmodel.EntireWorldViewModel
+import br.com.covid19news.viewmodel.CovidViewModel
 import kotlinx.android.synthetic.main.fragment_entire_world.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntireWorldFragment : Fragment() {
 
-    private val viewModel: EntireWorldViewModel by viewModel()
+    private val viewModel: CovidViewModel by viewModel()
+    private lateinit var typeSearch: TypeSearch
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +28,7 @@ class EntireWorldFragment : Fragment() {
         val binding = FragmentEntireWorldBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.swipeRefreshDetail.setOnRefreshListener { onShowData() }
+        binding.swipeRefreshDetail.setOnRefreshListener { onShowData(typeSearch) }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -51,15 +52,19 @@ class EntireWorldFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onShowData()
+
+        if (::typeSearch.isInitialized.not()) {
+            typeSearch = TypeSearch.ALL
+            onShowData(typeSearch)
+        }
     }
 
-    private fun onShowData() {
+    private fun onShowData(typeSearch: TypeSearch) {
         viewModel.onHideSwipeRefresh()
         if (this.onIsNetworkConnected().not()) {
             viewModel.onShowToast(getString(R.string.no_internet_connection))
             return
         }
-        viewModel.onShowData(TypeSearch.ALL.value)
+        viewModel.onShowData(typeSearch)
     }
 }

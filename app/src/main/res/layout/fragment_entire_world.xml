@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="br.com.covid19news.viewmodel.EntireWorldViewModel" />
+            type="br.com.covid19news.viewmodel.CovidViewModel" />
 
     </data>
 
