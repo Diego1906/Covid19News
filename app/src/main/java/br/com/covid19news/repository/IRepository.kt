@@ -5,5 +5,5 @@ import br.com.covid19news.util.TypeSearch
 
 interface IRepository {
 
-    suspend fun getDataAllCountries(typeSearch: TypeSearch): DataStatisticsModel
+    suspend fun getStatusWorldOrByCountry(typeSearch: TypeSearch): DataStatisticsModel
 }

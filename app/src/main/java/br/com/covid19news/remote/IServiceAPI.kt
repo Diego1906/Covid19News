@@ -6,6 +6,15 @@ import retrofit2.http.Query
 
 interface IServiceAPI {
 
+    /*
+     * Get the current status in the world OR current status for a specific country
+     */
     @GET("statistics")
-    suspend fun getDataAllCountries(@Query("country") value: String): DataStatistics
+    suspend fun getStatusWorldOrByCountry(@Query("country") value: String): DataStatistics
+
+    // Get the current status of all countries
+    @GET("statistics")
+    suspend fun getStatusAllCountries(): DataStatistics
 }
+
+

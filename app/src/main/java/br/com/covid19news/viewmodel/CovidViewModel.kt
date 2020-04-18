@@ -78,7 +78,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         withContext(Dispatchers.IO) {
             try {
                 _data.postValue(
-                    repository.getDataAllCountries(typeSearch)
+                    repository.getStatusWorldOrByCountry(typeSearch)
                 )
             } catch (ex: Throwable) {
                 Timber.tag(javaClass.simpleName);

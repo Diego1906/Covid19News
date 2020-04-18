@@ -7,9 +7,9 @@ import br.com.covid19news.util.TypeSearch
 
 class Repository(private val service: IService) : IRepository {
 
-    override suspend fun getDataAllCountries(typeSearch: TypeSearch): DataStatisticsModel {
+    override suspend fun getStatusWorldOrByCountry(typeSearch: TypeSearch): DataStatisticsModel {
         return service.getService()
-            .getDataAllCountries(typeSearch.value)
+            .getStatusWorldOrByCountry(typeSearch.value)
             .mapToModel()
     }
 }
