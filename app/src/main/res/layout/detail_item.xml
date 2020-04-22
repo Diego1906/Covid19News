@@ -23,25 +23,32 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide01"
+                android:id="@+id/guideDetailBegin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="8dp" />
+                app:layout_constraintGuide_begin="@dimen/dimen_8dp" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide02"
+                android:id="@+id/guideDetailSubItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="30dp" />
+                app:layout_constraintGuide_begin="@dimen/dimen_30dp" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guide03"
+                android:id="@+id/guideDetailMiddle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="150dp" />
+                app:layout_constraintGuide_begin="@dimen/dimen_150dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideDetailEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/dimen_8dp" />
 
             <TextView
                 android:id="@+id/lblCountry"
@@ -54,36 +61,32 @@
                 android:text="@string/country"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/txtCountry"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/guide01"
+                app:layout_constraintStart_toEndOf="@id/guideDetailBegin"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtCountry"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/dimen_8dp"
                 android:paddingTop="@dimen/dimen_8dp"
                 android:paddingEnd="@dimen/dimen_8dp"
                 android:text="@{viewModel.country}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="2"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblCountry"
-                app:layout_constraintVertical_weight="1"
                 tools:text="Nome do país" />
 
             <include
                 android:id="@+id/view01"
                 layout="@layout/view_separator"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_2dp"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
-                android:background="@color/colorGray300"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_1dp"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailBegin"
                 app:layout_constraintTop_toBottomOf="@id/txtCountry" />
 
             <TextView
@@ -97,9 +100,8 @@
                 android:text="@string/cases"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/guide01"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailBegin"
                 app:layout_constraintTop_toBottomOf="@id/view01" />
 
             <include
@@ -122,8 +124,8 @@
                 android:text="@string/newCase"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/view02" />
 
             <TextView
@@ -131,9 +133,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.cases.new}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                android:text="@{viewModel.cases.new}"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblNewCase"
                 tools:text="Quantidade de novos casos" />
 
@@ -145,8 +147,8 @@
                 android:text="@string/active"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/lblNewCase" />
 
             <TextView
@@ -154,9 +156,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.cases.active}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                android:text="@{viewModel.cases.active}"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblActive"
                 tools:text="Quantidade de casos ativos" />
 
@@ -168,8 +170,8 @@
                 android:text="@string/critical"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/lblActive" />
 
             <TextView
@@ -177,9 +179,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.cases.critical}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                android:text="@{viewModel.cases.critical}"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblCritical"
                 tools:text="Quantidade de casos críticos" />
 
@@ -191,8 +193,8 @@
                 android:text="@string/recovered"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/lblCritical" />
 
             <TextView
@@ -200,9 +202,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.cases.recovered}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                android:text="@{viewModel.cases.recovered}"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblRecovered"
                 tools:text="Quantidade de casos recuperados" />
 
@@ -214,8 +216,8 @@
                 android:text="@string/total"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toStartOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/lblRecovered" />
 
             <TextView
@@ -223,12 +225,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.cases.total}"
+                android:text="@{viewModel.cases.total}"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblTotalCases"
                 tools:text="Total de casos" />
 
@@ -255,8 +256,8 @@
                 android:text="@string/deaths"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide01"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailBegin"
                 app:layout_constraintTop_toBottomOf="@id/view03" />
 
             <include
@@ -279,8 +280,8 @@
                 android:text="@string/newDeath"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/view04" />
 
             <TextView
@@ -288,9 +289,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.deaths.new}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                android:text="@{viewModel.deaths.new}"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblNewDeath"
                 tools:text="Quantidade de novas mortes" />
 
@@ -302,8 +303,8 @@
                 android:text="@string/total"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/lblNewDeath" />
 
             <TextView
@@ -311,12 +312,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.deaths.total}"
+                android:text="@{viewModel.deaths.total}"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblTotalDeaths"
                 tools:text="Total de mortes" />
 
@@ -343,8 +343,8 @@
                 android:text="@string/tests"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide01"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailBegin"
                 app:layout_constraintTop_toBottomOf="@id/view05" />
 
             <include
@@ -367,8 +367,8 @@
                 android:text="@string/total"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
-                app:layout_constraintStart_toStartOf="@id/guide02"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
+                app:layout_constraintStart_toEndOf="@id/guideDetailSubItem"
                 app:layout_constraintTop_toBottomOf="@id/lblTests" />
 
             <TextView
@@ -376,11 +376,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.tests.total}"
+                android:text="@{viewModel.tests.total}"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblTotalTests"
                 tools:text="Total de testes" />
 
@@ -405,9 +405,9 @@
                 android:text="@string/date"
                 android:textColor="@android:color/black"
                 android:textStyle="bold|italic"
-                app:layout_constraintEnd_toStartOf="@id/guide03"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailMiddle"
                 app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/guide01"
+                app:layout_constraintStart_toEndOf="@id/guideDetailBegin"
                 app:layout_constraintTop_toBottomOf="@id/view07" />
 
             <TextView
@@ -416,10 +416,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_8dp"
                 android:padding="@dimen/dimen_8dp"
-                android:text="@{viewModel.response.time}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/guide03"
+                android:text="@{viewModel.time}"
+                app:layout_constraintEnd_toStartOf="@id/guideDetailEnd"
+                app:layout_constraintStart_toEndOf="@id/guideDetailMiddle"
                 app:layout_constraintTop_toTopOf="@id/lblDate"
                 tools:text="2020-04-13T05:30:04" />
 

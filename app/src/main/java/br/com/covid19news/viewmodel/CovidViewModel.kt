@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.covid19news.domain.*
 import br.com.covid19news.repository.IRepository
-import br.com.covid19news.util.TypeSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -66,7 +65,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         viewModelScope.cancel()
     }
 
-    fun onShowData(typeSearch: TypeSearch) {
+    fun onShowData(typeSearch: String) {
         viewModelScope.launch {
             onShowProgressBar(true)
             onCallRepository(typeSearch)
@@ -74,7 +73,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         }
     }
 
-    private suspend fun onCallRepository(typeSearch: TypeSearch) {
+    private suspend fun onCallRepository(typeSearch: String) {
         withContext(Dispatchers.IO) {
             try {
                 _data.postValue(

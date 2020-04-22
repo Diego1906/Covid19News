@@ -28,7 +28,7 @@ class EntireWorldFragment : Fragment() {
         val binding = FragmentEntireWorldBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.swipeRefreshDetail.setOnRefreshListener { onShowData(typeSearch) }
+        binding.swipeRefreshEntireWorld.setOnRefreshListener { onShowData(typeSearch) }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -44,7 +44,7 @@ class EntireWorldFragment : Fragment() {
         })
 
         viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
-            swipeRefreshDetail.isRefreshing = it
+            swipeRefreshEntireWorld.isRefreshing = it
         })
 
         return binding.root
@@ -65,6 +65,6 @@ class EntireWorldFragment : Fragment() {
             viewModel.onShowToast(getString(R.string.no_internet_connection))
             return
         }
-        viewModel.onShowData(typeSearch)
+        viewModel.onShowData(typeSearch.value)
     }
 }
