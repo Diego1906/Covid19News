@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+private const val INDEX_ZERO = 0
+
 class CovidViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application) {
 
@@ -24,9 +26,9 @@ class CovidViewModel(val repository: IRepository, application: Application) :
     val toast
         get() = _toast
 
-    private val _progressBar = MutableLiveData(View.GONE)
-    val progressBar
-        get() = _progressBar
+    private val _isVisibleProgressBar = MutableLiveData(View.GONE)
+    val isVisibleProgressBar
+        get() = _isVisibleProgressBar
 
     private val _swipeIsRefreshing = MutableLiveData<Boolean>()
     val swipeIsRefreshing
@@ -60,27 +62,31 @@ class CovidViewModel(val repository: IRepository, application: Application) :
     val time
         get() = _time
 
+    private val _isVisibleCardView = MutableLiveData(View.INVISIBLE)
+    val isVisibleCardView
+        get() = _isVisibleCardView
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
     }
 
-    fun onShowData(typeSearch: String) {
+    fun onShowData(filter: String) {
         viewModelScope.launch {
             onShowProgressBar(true)
-            onCallRepository(typeSearch)
+            onCallRepository(filter)
             onShowProgressBar(false)
         }
     }
 
-    private suspend fun onCallRepository(typeSearch: String) {
+    private suspend fun onCallRepository(filter: String) {
         withContext(Dispatchers.IO) {
             try {
                 _data.postValue(
-                    repository.getStatusWorldOrByCountry(typeSearch)
+                    repository.getStatusWorldOrByCountry(filter)
                 )
             } catch (ex: Throwable) {
-                Timber.tag(javaClass.simpleName);
+                Timber.tag(javaClass.simpleName)
                 Timber.e(ex)
                 onShowToast(ex.message)
             }
@@ -88,7 +94,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
     }
 
     fun onSortData(data: DataStatisticsModel) {
-        _response.value = data.response?.get(0)
+        _response.value = data.response?.get(INDEX_ZERO)
         _cases.value = _response.value?.cases
         _deaths.value = _response.value?.deaths
         _tests.value = _response.value?.tests
@@ -98,12 +104,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
     }
 
     private fun onShowProgressBar(value: Boolean) {
-        _progressBar.postValue(onShow(value))
-    }
-
-    private fun onShow(value: Boolean) = when (value) {
-        true -> View.VISIBLE
-        else -> View.GONE
+        _isVisibleProgressBar.postValue(onIsVisible(value))
     }
 
     fun onShowToast(value: String?) {
@@ -112,5 +113,14 @@ class CovidViewModel(val repository: IRepository, application: Application) :
 
     fun onHideSwipeRefresh() {
         _swipeIsRefreshing.value = false
+    }
+
+    fun onIsVisibleCardView(value: Boolean) {
+        _isVisibleCardView.value = onIsVisible(value)
+    }
+
+    private fun onIsVisible(value: Boolean) = when (value) {
+        true -> View.VISIBLE
+        else -> View.GONE
     }
 }

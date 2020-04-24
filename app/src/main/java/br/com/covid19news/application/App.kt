@@ -8,13 +8,13 @@ import org.koin.core.context.startKoin
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-class CovidApplication : Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
         startKoin {
-            androidContext(this@CovidApplication)
+            androidContext(this@App)
             modules(appModule)
         }
 
@@ -26,7 +26,7 @@ class CovidApplication : Application() {
         private lateinit var INSTANCE: Context
 
         fun setContext(context: Context) {
-            synchronized(CovidApplication::class.java) {
+            synchronized(App::class.java) {
                 if (!Companion::INSTANCE.isInitialized) {
                     INSTANCE = context
                 }

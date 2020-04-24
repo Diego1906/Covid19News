@@ -3,7 +3,7 @@ package br.com.covid19news.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.covid19news.R
-import br.com.covid19news.application.CovidApplication
+import br.com.covid19news.application.App
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,6 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CovidApplication.setContext(applicationContext)
+        App.setContext(applicationContext)
     }
 }

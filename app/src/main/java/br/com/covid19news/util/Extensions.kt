@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.covid19news.R
-import br.com.covid19news.application.CovidApplication
+import br.com.covid19news.application.App
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -14,7 +14,7 @@ fun String.onShowToast(context: Context) {
 }
 
 fun String.onFormatDateTime(): String {
-    val context: Context = CovidApplication.getContext()
+    val context: Context = App.getContext()
 
     val dateParser = SimpleDateFormat(
         context.getString(R.string.pattern_date_api),
@@ -39,7 +39,7 @@ fun String.onFormatDateTime(): String {
 }
 
 fun String.removePrefix(): String {
-    return this.removePrefix(CovidApplication.getContext().getString(R.string.str_plus))
+    return this.removePrefix(App.getContext().getString(R.string.str_plus))
 }
 
 fun Fragment.onIsNetworkConnected(): Boolean {

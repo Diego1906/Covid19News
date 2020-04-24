@@ -6,9 +6,9 @@ import br.com.covid19news.remote.IService
 
 class Repository(private val service: IService) : IRepository {
 
-    override suspend fun getStatusWorldOrByCountry(typeSearch: String): DataStatisticsModel {
+    override suspend fun getStatusWorldOrByCountry(filter: String): DataStatisticsModel {
         return service.getService()
-            .getStatusWorldOrByCountry(typeSearch)
+            .getStatusWorldOrByCountry(filter)
             .mapToModel()
     }
 }
