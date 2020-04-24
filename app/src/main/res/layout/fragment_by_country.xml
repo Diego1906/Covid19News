@@ -68,7 +68,6 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_0dp"
-            android:fillViewport="true"
             android:visibility="@{viewModel.isVisibleCardView}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideByCountryEnd"

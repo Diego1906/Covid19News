@@ -26,42 +26,24 @@
     <string name="no_internet_connection">Sem conexão com a internet</string>
     <string name="search">Pesquisar</string>
 
-    <!-- Countries -->
-    <string name="australia">AUSTRÁLIA</string>
-    <string name="belgium">BÉLGICA</string>
-    <string name="brazil">BRASIL</string>
-    <string name="canada">CANADÁ</string>
-    <string name="china">CHINA</string>
-    <string name="france">FRANÇA</string>
-    <string name="germany">ALEMANHA</string>
-    <string name="india">ÍNDIA</string>
-    <string name="ireland">IRLANDA</string>
-    <string name="israel">ISRAEL</string>
-    <string name="italy">ITÁLIA</string>
-    <string name="japan">JAPÃO</string>
-    <string name="portugal">PORTUGAL</string>
-    <string name="spain">ESPANHA</string>
-    <string name="united_kingdom">REINO UNIDO</string>
-    <string name="united_states">ESTADOS UNIDOS</string>
-
     <!-- List of the countries used in the search by current status -->
     <string-array name="listCountries">
-        <item>@string/germany</item>
-        <item>@string/australia</item>
-        <item>@string/belgium</item>
-        <item>@string/brazil</item>
-        <item>@string/canada</item>
-        <item>@string/china</item>
-        <item>@string/spain</item>
-        <item>@string/united_states</item>
-        <item>@string/france</item>
-        <item>@string/india</item>
-        <item>@string/ireland</item>
-        <item>@string/israel</item>
-        <item>@string/italy</item>
-        <item>@string/japan</item>
-        <item>@string/portugal</item>
-        <item>@string/united_kingdom</item>
+        <item>ALEMANHA</item>
+        <item>AUSTRÁLIA</item>
+        <item>BÉLGICA</item>
+        <item>BRASIL</item>
+        <item>CANADÁ</item>
+        <item>CHINA</item>
+        <item>ESPANHA</item>
+        <item>ESTADOS UNIDOS</item>
+        <item>FRANÇA</item>
+        <item>ÍNDIA</item>
+        <item>IRLANDA</item>
+        <item>ISRAEL</item>
+        <item>ITÁLIA</item>
+        <item>JAPÃO</item>
+        <item>PORTUGAL</item>
+        <item>REINO UNIDO</item>
     </string-array>
 
     <!-- List of the countries that will be using in the search by current status as filter -->
@@ -83,5 +65,4 @@
         <item>"portugal"</item>
         <item>"uk"</item>
     </string-array>
-
 </resources>
