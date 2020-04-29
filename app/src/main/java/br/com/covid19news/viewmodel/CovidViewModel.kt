@@ -93,7 +93,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         }
     }
 
-    fun onSortData(data: DataStatisticsModel) {
+    fun onSetCountryData(data: DataStatisticsModel) {
         _response.value = data.response?.get(INDEX_ZERO)
         _cases.value = _response.value?.cases
         _deaths.value = _response.value?.deaths

@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tolls="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="response"
+            type="br.com.covid19news.domain.ResponseModel" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

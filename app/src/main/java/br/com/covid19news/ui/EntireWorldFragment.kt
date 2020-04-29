@@ -38,7 +38,7 @@ class EntireWorldFragment : Fragment() {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                viewModel.onSortData(it)
+                viewModel.onSetCountryData(it)
             }
         })
 

@@ -41,7 +41,7 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
                 viewModel.onIsVisibleCardView(true)
-                viewModel.onSortData(it)
+                viewModel.onSetCountryData(it)
             }
         })
 
