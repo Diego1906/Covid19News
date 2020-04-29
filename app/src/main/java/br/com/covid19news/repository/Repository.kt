@@ -11,4 +11,10 @@ class Repository(private val service: IService) : IRepository {
             .getStatusWorldOrByCountry(filter)
             .mapToModel()
     }
+
+    override suspend fun getStatusAllCountries(): DataStatisticsModel {
+        return service.getService()
+            .getStatusAllCountries()
+            .mapToModel()
+    }
 }

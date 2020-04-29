@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.covid19news.domain.*
 import br.com.covid19news.repository.IRepository
+import br.com.covid19news.util.TypeSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -71,19 +72,20 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         viewModelScope.cancel()
     }
 
-    fun onShowData(filter: String) {
+    fun onShowData(filter: String, typeSearch: TypeSearch) {
         viewModelScope.launch {
             onShowProgressBar(true)
-            onCallRepository(filter)
+            onCallRepository(filter, typeSearch)
             onShowProgressBar(false)
         }
     }
 
-    private suspend fun onCallRepository(filter: String) {
+    private suspend fun onCallRepository(filter: String, typeSearch: TypeSearch) {
         withContext(Dispatchers.IO) {
             try {
                 _data.postValue(
-                    repository.getStatusWorldOrByCountry(filter)
+                    //repository.getStatusWorldOrByCountry(filter)
+                    onChooseOptionSearch(filter, typeSearch)
                 )
             } catch (ex: Throwable) {
                 Timber.tag(javaClass.simpleName)
@@ -92,6 +94,17 @@ class CovidViewModel(val repository: IRepository, application: Application) :
             }
         }
     }
+
+
+    private suspend fun onChooseOptionSearch(filter: String, typeSearch: TypeSearch) =
+        when (typeSearch) {
+            TypeSearch.All, TypeSearch.Country -> {
+                repository.getStatusWorldOrByCountry(filter)
+            }
+            TypeSearch.Statistcs -> {
+                repository.getStatusAllCountries()
+            }
+        }
 
     fun onSetCountryData(data: DataStatisticsModel) {
         _response.value = data.response?.get(INDEX_ZERO)

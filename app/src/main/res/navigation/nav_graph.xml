@@ -34,5 +34,18 @@
         android:id="@+id/allCountriesFragment"
         android:name="br.com.covid19news.ui.AllCountriesFragment"
         android:label="fragment_all_countries"
-        tools:layout="@layout/fragment_all_countries" />
+        tools:layout="@layout/fragment_all_countries">
+        <action
+            android:id="@+id/action_allCountriesFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="br.com.covid19news.ui.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="response"
+            app:argType="br.com.covid19news.domain.ResponseModel" />
+    </fragment>
 </navigation>

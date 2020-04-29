@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.covid19news.databinding.FragmentAllCountriesBinding
+import br.com.covid19news.databinding.ItemListCountriesBinding
 import br.com.covid19news.domain.ResponseModel
 
 class AllCountriesAdapter(private val onclickListener: OnclickListener) :
@@ -24,7 +24,7 @@ class AllCountriesAdapter(private val onclickListener: OnclickListener) :
     }
 }
 
-class ItemHolder private constructor(val binding: FragmentAllCountriesBinding) :
+class ItemHolder private constructor(private val binding: ItemListCountriesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(response: ResponseModel) {
@@ -35,7 +35,7 @@ class ItemHolder private constructor(val binding: FragmentAllCountriesBinding) :
     companion object {
         fun from(parent: ViewGroup): ItemHolder {
             val inflater = LayoutInflater.from(parent.context)
-            val view = FragmentAllCountriesBinding.inflate(inflater)
+            val view = ItemListCountriesBinding.inflate(inflater)
             return ItemHolder(view)
         }
     }

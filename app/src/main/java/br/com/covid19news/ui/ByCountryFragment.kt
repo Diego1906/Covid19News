@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentByCountryBinding
+import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onIsNetworkConnected
 import br.com.covid19news.util.onShowToast
 import br.com.covid19news.viewmodel.CovidViewModel
@@ -80,6 +81,6 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
             viewModel.onShowToast(getString(R.string.no_internet_connection))
             return
         }
-        viewModel.onShowData(filter)
+        viewModel.onShowData(filter, TypeSearch.Country)
     }
 }
