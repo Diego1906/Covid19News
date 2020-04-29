@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
-import br.com.covid19news.util.Countries
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onIsNetworkConnected
 import br.com.covid19news.util.onShowToast
@@ -39,7 +38,7 @@ class EntireWorldFragment : Fragment() {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                viewModel.onSetCountryData(it)
+                viewModel.onSetStatusData(it)
             }
         })
 
@@ -54,7 +53,7 @@ class EntireWorldFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (::filter.isInitialized.not()) {
-            filter = Countries.ALL.toString()
+            filter = TypeSearch.All.name
             onShowData(filter)
         }
     }

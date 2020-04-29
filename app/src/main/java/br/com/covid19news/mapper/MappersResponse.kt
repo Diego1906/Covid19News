@@ -4,7 +4,7 @@ import br.com.covid19news.R
 import br.com.covid19news.application.App
 import br.com.covid19news.domain.*
 import br.com.covid19news.remote.dto.*
-import br.com.covid19news.util.Countries
+import br.com.covid19news.util.TypeSearch
 
 import br.com.covid19news.util.onFormatDateTime
 import br.com.covid19news.util.removePrefix
@@ -19,7 +19,7 @@ fun DataStatistics.mapToModel() = DataStatisticsModel(
 
 fun Response.mapToModel() = ResponseModel(
     country = when (this.country) {
-        Countries.ALL.value -> App.getContext().getString(R.string.all)
+        TypeSearch.All.name -> App.getContext().getString(R.string.all)
         else -> this.country
     },
     cases = this.cases?.mapToModel(),

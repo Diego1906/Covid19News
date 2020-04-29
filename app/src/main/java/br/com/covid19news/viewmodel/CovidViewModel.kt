@@ -72,7 +72,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         viewModelScope.cancel()
     }
 
-    fun onShowData(filter: String, typeSearch: TypeSearch) {
+    fun onShowData(filter: String?, typeSearch: TypeSearch) {
         viewModelScope.launch {
             onShowProgressBar(true)
             onCallRepository(filter, typeSearch)
@@ -80,11 +80,10 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         }
     }
 
-    private suspend fun onCallRepository(filter: String, typeSearch: TypeSearch) {
+    private suspend fun onCallRepository(filter: String?, typeSearch: TypeSearch) {
         withContext(Dispatchers.IO) {
             try {
                 _data.postValue(
-                    //repository.getStatusWorldOrByCountry(filter)
                     onChooseOptionSearch(filter, typeSearch)
                 )
             } catch (ex: Throwable) {
@@ -95,18 +94,19 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         }
     }
 
-
-    private suspend fun onChooseOptionSearch(filter: String, typeSearch: TypeSearch) =
+    private suspend fun onChooseOptionSearch(filter: String?, typeSearch: TypeSearch) =
         when (typeSearch) {
             TypeSearch.All, TypeSearch.Country -> {
-                repository.getStatusWorldOrByCountry(filter)
+                filter?.let {
+                    repository.getStatusWorldOrByCountry(it)
+                }
             }
             TypeSearch.Statistcs -> {
                 repository.getStatusAllCountries()
             }
         }
 
-    fun onSetCountryData(data: DataStatisticsModel) {
+    fun onSetStatusData(data: DataStatisticsModel) {
         _response.value = data.response?.get(INDEX_ZERO)
         _cases.value = _response.value?.cases
         _deaths.value = _response.value?.deaths
