@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
-import br.com.covid19news.util.onIsNetworkConnected
+import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onShowToast
 import br.com.covid19news.viewmodel.CovidViewModel
 import kotlinx.android.synthetic.main.fragment_entire_world.*
@@ -24,10 +23,10 @@ class EntireWorldFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentEntireWorldBinding.inflate(inflater, container, false)
+        val binding = FragmentEntireWorldBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.swipeRefreshEntireWorld.setOnRefreshListener { onShowData(filter) }
+        binding.swipeRefreshEntireWorld.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -54,16 +53,11 @@ class EntireWorldFragment : Fragment() {
 
         if (::filter.isInitialized.not()) {
             filter = TypeSearch.All.name
-            onShowData(filter)
+            onShowData()
         }
     }
 
-    private fun onShowData(filter: String) {
-        viewModel.onHideSwipeRefresh()
-        if (this.onIsNetworkConnected().not()) {
-            viewModel.onShowToast(getString(R.string.no_internet_connection))
-            return
-        }
-        viewModel.onShowData(filter, TypeSearch.All)
+    private fun onShowData() {
+        this.onCheckInternetAndShowData(Triple(viewModel, filter, TypeSearch.All), true)
     }
 }

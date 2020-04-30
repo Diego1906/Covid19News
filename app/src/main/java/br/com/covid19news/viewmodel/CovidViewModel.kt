@@ -17,7 +17,7 @@ import timber.log.Timber
 private const val INDEX_ZERO = 0
 
 class CovidViewModel(val repository: IRepository, application: Application) :
-    AndroidViewModel(application) {
+    AndroidViewModel(application), IViewModel {
 
     private val _data = MutableLiveData<DataStatisticsModel>()
     val data
@@ -72,7 +72,7 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         viewModelScope.cancel()
     }
 
-    fun onShowData(filter: String?, typeSearch: TypeSearch) {
+    override fun onShowData(filter: String?, typeSearch: TypeSearch) {
         viewModelScope.launch {
             onShowProgressBar(true)
             onCallRepository(filter, typeSearch)
@@ -120,11 +120,11 @@ class CovidViewModel(val repository: IRepository, application: Application) :
         _isVisibleProgressBar.postValue(onIsVisible(value))
     }
 
-    fun onShowToast(value: String?) {
+    override fun onShowToast(value: String?) {
         _toast.postValue(value)
     }
 
-    fun onHideSwipeRefresh() {
+    override fun onHideSwipeRefresh() {
         _swipeIsRefreshing.value = false
     }
 

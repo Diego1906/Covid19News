@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentByCountryBinding
 import br.com.covid19news.util.TypeSearch
-import br.com.covid19news.util.onIsNetworkConnected
+import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onShowToast
 import br.com.covid19news.viewmodel.CovidViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -19,18 +19,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private val viewModel: CovidViewModel by viewModel()
-    private var filter: String = ""
+    private lateinit var filter: String
     private lateinit var binding: FragmentByCountryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentByCountryBinding.inflate(inflater, container, false)
+        binding = FragmentByCountryBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.buttonSearch.setOnClickListener { onShowData(filter) }
-        binding.spinnerPais.onItemSelectedListener = this
+        binding.buttonSearch.setOnClickListener { onShowData() }
+        binding.spinnerCountry.onItemSelectedListener = this
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -55,7 +55,7 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun onInitializeSpinner() {
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the context, string array and a default spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.listCountries,
@@ -64,7 +64,7 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            binding.spinnerPais.adapter = adapter
+            binding.spinnerCountry.adapter = adapter
         }
     }
 
@@ -76,11 +76,7 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
         filter = resources.getStringArray(R.array.filterCountries)[position]
     }
 
-    private fun onShowData(filter: String) {
-        if (this.onIsNetworkConnected().not()) {
-            viewModel.onShowToast(getString(R.string.no_internet_connection))
-            return
-        }
-        viewModel.onShowData(filter, TypeSearch.Country)
+    private fun onShowData() {
+        this.onCheckInternetAndShowData(Triple(viewModel, filter, TypeSearch.Country))
     }
 }

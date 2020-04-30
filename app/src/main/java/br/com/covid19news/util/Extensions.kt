@@ -4,8 +4,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import br.com.covid19news.R
 import br.com.covid19news.application.App
+import br.com.covid19news.viewmodel.IViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,4 +48,22 @@ fun String.removePrefix(): String {
 fun Fragment.onIsNetworkConnected(): Boolean {
     val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     return cm.activeNetworkInfo?.isConnectedOrConnecting == true
+}
+
+fun Fragment.onCheckInternetAndShowData(
+    params: Triple<IViewModel, String?, TypeSearch>,
+    isHideSwipe: Boolean = false
+) {
+    if (isHideSwipe)
+        params.first.onHideSwipeRefresh()
+
+    if (this.onIsNetworkConnected().not()) {
+        params.first.onShowToast(getString(R.string.no_internet_connection))
+        return
+    }
+    params.first.onShowData(params.second, params.third)
+}
+
+fun Fragment.onNavigate(directions: NavDirections) {
+    this.findNavController().navigate(directions)
 }

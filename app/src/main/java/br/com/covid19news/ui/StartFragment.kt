@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import br.com.covid19news.R
+import br.com.covid19news.util.onNavigate
 import br.com.covid19news.util.onShowToast
 import br.com.covid19news.viewmodel.StartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,20 +40,16 @@ class StartFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         when (item.itemId) {
-            R.id.entireWorld -> onNavigate(
+            R.id.entireWorld -> this.onNavigate(
                 StartFragmentDirections.actionStartFragmentToEntireWorldFragment()
             )
-            R.id.byCountry -> onNavigate(
+            R.id.byCountry -> this.onNavigate(
                 StartFragmentDirections.actionStartFragmentToByCountryFragment()
             )
-            R.id.allCountries -> onNavigate(
+            R.id.allCountries -> this.onNavigate(
                 StartFragmentDirections.actionStartFragmentToAllCountriesFragment()
             )
         }
         return true
-    }
-
-    private fun onNavigate(directions: NavDirections) {
-        this.findNavController().navigate(directions)
     }
 }

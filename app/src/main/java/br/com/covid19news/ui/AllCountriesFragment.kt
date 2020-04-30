@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentAllCountriesBinding
 import br.com.covid19news.ui.adapter.AllCountriesAdapter
 import br.com.covid19news.ui.adapter.OnclickListener
 import br.com.covid19news.util.TypeSearch
-import br.com.covid19news.util.onIsNetworkConnected
+import br.com.covid19news.util.onCheckInternetAndShowData
+import br.com.covid19news.util.onNavigate
 import br.com.covid19news.util.onShowToast
 import br.com.covid19news.viewmodel.CovidViewModel
 import kotlinx.android.synthetic.main.fragment_all_countries.*
@@ -24,8 +23,7 @@ class AllCountriesFragment : Fragment() {
     private lateinit var typeSearch: TypeSearch
     private val recyclerAdapter by lazy {
         AllCountriesAdapter(OnclickListener {
-            viewModel.onShowToast(null)
-            this.findNavController().navigate(
+            this.onNavigate(
                 AllCountriesFragmentDirections.actionAllCountriesFragmentToDetailFragment(it)
             )
         })
@@ -35,16 +33,17 @@ class AllCountriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentAllCountriesBinding.inflate(
-            inflater, container, false
-        )
+        val binding = FragmentAllCountriesBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.recyclerAllCountries.adapter = recyclerAdapter
-        binding.swipeRefreshAllCountries.setOnRefreshListener { onShowData(typeSearch) }
+        binding.swipeRefreshAllCountries.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.onShowToast(requireContext())
+            it?.let {
+                it.onShowToast(requireContext())
+                viewModel.onShowToast(null)
+            }
         })
 
         viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
@@ -61,16 +60,11 @@ class AllCountriesFragment : Fragment() {
 
         if (::typeSearch.isInitialized.not()) {
             typeSearch = TypeSearch.Statistcs
-            onShowData(typeSearch)
+            onShowData()
         }
     }
 
-    private fun onShowData(typeSearch: TypeSearch) {
-        viewModel.onHideSwipeRefresh()
-        if (this.onIsNetworkConnected().not()) {
-            viewModel.onShowToast(getString(R.string.no_internet_connection))
-            return
-        }
-        viewModel.onShowData(null, typeSearch)
+    private fun onShowData() {
+        this.onCheckInternetAndShowData(Triple(viewModel, null, typeSearch), true)
     }
 }

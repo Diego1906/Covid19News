@@ -37,13 +37,13 @@
             android:layout_marginTop="@dimen/dimen_8dp"
             android:padding="@dimen/dimen_8dp"
             android:text="@string/country"
-            app:layout_constraintEnd_toStartOf="@id/spinnerPais"
+            app:layout_constraintEnd_toStartOf="@id/spinnerCountry"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="@id/guideByCountryBegin"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/spinnerPais"
+            android:id="@+id/spinnerCountry"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/lblPais"
