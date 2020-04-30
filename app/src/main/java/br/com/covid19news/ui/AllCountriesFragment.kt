@@ -22,7 +22,6 @@ class AllCountriesFragment : Fragment() {
 
     private val viewModel: CovidViewModel by viewModel()
     private lateinit var typeSearch: TypeSearch
-
     private val recyclerAdapter by lazy {
         AllCountriesAdapter(OnclickListener {
             viewModel.onShowToast(null)

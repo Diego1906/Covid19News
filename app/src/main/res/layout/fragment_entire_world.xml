@@ -59,7 +59,7 @@
                     layout="@layout/detail_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    bind:viewModel="@{viewModel}" />
+                    bind:response="@{viewModel.response}" />
             </ScrollView>
 
             <include
