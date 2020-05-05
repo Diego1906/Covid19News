@@ -12,15 +12,14 @@ import br.com.covid19news.ui.adapter.OnclickListener
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onNavigate
-import br.com.covid19news.util.onShowToast
-import br.com.covid19news.viewmodel.CovidViewModel
+import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.viewmodel.GenericViewModel
 import kotlinx.android.synthetic.main.fragment_all_countries.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllCountriesFragment : Fragment() {
 
-    private val viewModel: CovidViewModel by viewModel()
-    private lateinit var typeSearch: TypeSearch
+    private val viewModel: GenericViewModel by viewModel()
     private val recyclerAdapter by lazy {
         AllCountriesAdapter(OnclickListener {
             this.onNavigate(
@@ -30,8 +29,7 @@ class AllCountriesFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentAllCountriesBinding.inflate(inflater)
         binding.viewModel = viewModel
@@ -40,16 +38,17 @@ class AllCountriesFragment : Fragment() {
         binding.swipeRefreshAllCountries.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
+            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
+        })
+
+        viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                it.onShowToast(requireContext())
-                viewModel.onShowToast(null)
+                viewModel.onSetResponse(it)
             }
         })
 
         viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                swipeRefreshAllCountries.isRefreshing = it
-            }
+            swipeRefreshAllCountries.isRefreshing = it
         })
 
         return binding.root
@@ -57,14 +56,12 @@ class AllCountriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (::typeSearch.isInitialized.not()) {
-            typeSearch = TypeSearch.Statistcs
+        if (savedInstanceState == null) {
             onShowData()
         }
     }
 
     private fun onShowData() {
-        this.onCheckInternetAndShowData(Triple(viewModel, null, typeSearch), true)
+        this.onCheckInternetAndShowData(Triple(viewModel, null, TypeSearch.Statistcs), true)
     }
 }

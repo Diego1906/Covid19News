@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="br.com.covid19news.viewmodel.CovidViewModel" />
+            type="br.com.covid19news.viewmodel.GenericViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:listData="@{viewModel.data.response}"
+                app:listData="@{viewModel.data.listResponse}"
                 tools:listitem="@layout/item_list_countries" />
 
             <include

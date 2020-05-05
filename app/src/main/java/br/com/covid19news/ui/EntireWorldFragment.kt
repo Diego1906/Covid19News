@@ -9,19 +9,17 @@ import androidx.lifecycle.Observer
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onCheckInternetAndShowData
-import br.com.covid19news.util.onShowToast
-import br.com.covid19news.viewmodel.CovidViewModel
+import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.viewmodel.GenericViewModel
 import kotlinx.android.synthetic.main.fragment_entire_world.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EntireWorldFragment : Fragment() {
 
-    private val viewModel: CovidViewModel by viewModel()
-    private lateinit var filter: String
+    private val viewModel: GenericViewModel by viewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentEntireWorldBinding.inflate(inflater)
         binding.viewModel = viewModel
@@ -29,15 +27,12 @@ class EntireWorldFragment : Fragment() {
         binding.swipeRefreshEntireWorld.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                it.onShowToast(requireContext())
-                viewModel.onShowToast(null)
-            }
+            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
         })
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                viewModel.onSetStatusData(it)
+                viewModel.onSetResponse(it)
             }
         })
 
@@ -50,14 +45,14 @@ class EntireWorldFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (::filter.isInitialized.not()) {
-            filter = TypeSearch.All.name
+        if (savedInstanceState == null) {
             onShowData()
         }
     }
 
     private fun onShowData() {
-        this.onCheckInternetAndShowData(Triple(viewModel, filter, TypeSearch.All), true)
+        this.onCheckInternetAndShowData(
+            Triple(viewModel, TypeSearch.All.name, TypeSearch.All), true
+        )
     }
 }

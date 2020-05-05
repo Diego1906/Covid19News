@@ -8,37 +8,41 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import br.com.covid19news.R
 import br.com.covid19news.application.App
-import br.com.covid19news.viewmodel.IViewModel
+import br.com.covid19news.viewmodel.IBaseViewModel
+import br.com.covid19news.viewmodel.IGenericViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+
+fun String.onNotifyWithToast(params: Pair<Context, IBaseViewModel>) {
+    this.onShowToast(params.first)
+    params.second.onShowToast(null)
+}
 
 fun String.onShowToast(context: Context) {
     Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
 
 fun String.onFormatDateTime(): String {
-    val context: Context = App.getContext()
-
-    val dateParser = SimpleDateFormat(
-        context.getString(R.string.pattern_date_api),
+    val dateParserApi = SimpleDateFormat(
+        App.getContext().getString(R.string.pattern_date_api),
         Locale.ENGLISH
     ).apply {
-        timeZone = TimeZone.getTimeZone(context.getString(R.string.time_zone_gmt))
+        timeZone = TimeZone.getTimeZone(App.getContext().getString(R.string.time_zone_gmt))
     }
 
-    val dateFormatter = SimpleDateFormat(
-        context.getString(R.string.pattern_date_pt_br),
+    val dateFormatterLocal = SimpleDateFormat(
+        App.getContext().getString(R.string.pattern_date_pt_br),
         Locale.getDefault()
     )
 
-    var newDateFormated: String = Date().toString()
+    var newFormatedDate: String = Date().toString()
 
-    val dateApi = dateParser.parse(this)
+    val dateApi = dateParserApi.parse(this)
     dateApi?.let {
-        newDateFormated = dateFormatter.format(it)
+        newFormatedDate = dateFormatterLocal.format(it)
     }
 
-    return newDateFormated
+    return newFormatedDate
 }
 
 fun String.removePrefix(): String {
@@ -51,13 +55,13 @@ fun Fragment.onIsNetworkConnected(): Boolean {
 }
 
 fun Fragment.onCheckInternetAndShowData(
-    params: Triple<IViewModel, String?, TypeSearch>,
+    params: Triple<IGenericViewModel, String?, TypeSearch>,
     isHideSwipe: Boolean = false
 ) {
     if (isHideSwipe)
         params.first.onHideSwipeRefresh()
 
-    if (this.onIsNetworkConnected().not()) {
+    if (onIsNetworkConnected().not()) {
         params.first.onShowToast(getString(R.string.no_internet_connection))
         return
     }
@@ -65,5 +69,5 @@ fun Fragment.onCheckInternetAndShowData(
 }
 
 fun Fragment.onNavigate(directions: NavDirections) {
-    this.findNavController().navigate(directions)
+    findNavController().navigate(directions)
 }

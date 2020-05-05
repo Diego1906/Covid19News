@@ -5,7 +5,6 @@ import br.com.covid19news.application.App
 import br.com.covid19news.domain.*
 import br.com.covid19news.remote.dto.*
 import br.com.covid19news.util.TypeSearch
-
 import br.com.covid19news.util.onFormatDateTime
 import br.com.covid19news.util.removePrefix
 
@@ -14,7 +13,7 @@ fun DataStatistics.mapToModel() = DataStatisticsModel(
     //parameters = this.parameters.map { it.mapToModel() },
     //errors = this.errors.map { it.mapToModel() },
     results = this.results,
-    response = this.response?.map { it.mapToModel() }
+    listResponse = this.listResponse?.map { it.mapToModel() }
 )
 
 fun Response.mapToModel() = ResponseModel(

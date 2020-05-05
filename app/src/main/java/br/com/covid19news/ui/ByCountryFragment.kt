@@ -12,19 +12,18 @@ import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentByCountryBinding
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onCheckInternetAndShowData
-import br.com.covid19news.util.onShowToast
-import br.com.covid19news.viewmodel.CovidViewModel
+import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.viewmodel.GenericViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    private val viewModel: CovidViewModel by viewModel()
+    private val viewModel: GenericViewModel by viewModel()
     private lateinit var filter: String
     private lateinit var binding: FragmentByCountryBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentByCountryBinding.inflate(inflater)
         binding.viewModel = viewModel
@@ -33,16 +32,12 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.spinnerCountry.onItemSelectedListener = this
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                it.onShowToast(requireContext())
-                viewModel.onShowToast(null)
-            }
+            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
         })
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
-                viewModel.onIsVisibleCardView(true)
-                viewModel.onSetStatusData(it)
+                viewModel.onSetResponse(it)
             }
         })
 

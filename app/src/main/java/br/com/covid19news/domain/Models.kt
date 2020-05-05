@@ -9,7 +9,7 @@ data class DataStatisticsModel(
     //val parameters: List<ParametersModel>,
     //val errors: List<ErrorsModel>,
     val results: String?,
-    val response: List<ResponseModel>?
+    val listResponse: List<ResponseModel>?
 ) : Parcelable
 
 @Parcelize

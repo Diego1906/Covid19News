@@ -17,7 +17,7 @@ class Service : IService {
             .addInterceptor { chain ->
                 val request: Request = chain.request().newBuilder()
                     .addHeader(BuildConfig.HEADER_HOST_NAME, BuildConfig.HEADER_HOST_VALUE)
-                    .addHeader(BuildConfig.HEADER_API_KEY_NAME, BuildConfig.API_KEY)
+                    .addHeader(BuildConfig.HEADER_API_KEY_NAME, BuildConfig.API_KEY_VALUE)
                     .build()
 
                 chain.proceed(request)

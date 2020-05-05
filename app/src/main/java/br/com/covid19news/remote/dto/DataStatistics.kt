@@ -10,7 +10,7 @@ data class DataStatistics(
     //@Json(name = "parameters") val parameters: List<Parameters>,
     //@Json(name = "errors") val errors: List<Errors>,
     @Json(name = "results") val results: String?,
-    @Json(name = "response") val response: List<Response>?
+    @Json(name = "response") val listResponse: List<Response>?
 ) : Parcelable
 
 
