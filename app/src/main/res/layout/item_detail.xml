@@ -52,7 +52,7 @@
 
             <TextView
                 android:id="@+id/lblCountry"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:paddingStart="@dimen/dimen_8dp"
@@ -91,7 +91,7 @@
 
             <TextView
                 android:id="@+id/lblCases"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:paddingStart="@dimen/dimen_8dp"
@@ -118,7 +118,7 @@
 
             <TextView
                 android:id="@+id/lblNewCase"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/newCase"
@@ -130,7 +130,7 @@
 
             <TextView
                 android:id="@+id/txtNewCase"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.cases.new}"
@@ -141,7 +141,7 @@
 
             <TextView
                 android:id="@+id/lblActive"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/active"
@@ -153,7 +153,7 @@
 
             <TextView
                 android:id="@+id/txtActive"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.cases.active}"
@@ -164,7 +164,7 @@
 
             <TextView
                 android:id="@+id/lblCritical"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/critical"
@@ -176,7 +176,7 @@
 
             <TextView
                 android:id="@+id/txtCritical"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.cases.critical}"
@@ -187,7 +187,7 @@
 
             <TextView
                 android:id="@+id/lblRecovered"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/recovered"
@@ -199,7 +199,7 @@
 
             <TextView
                 android:id="@+id/txtRecovered"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.cases.recovered}"
@@ -210,7 +210,7 @@
 
             <TextView
                 android:id="@+id/lblTotalCases"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/total"
@@ -222,7 +222,7 @@
 
             <TextView
                 android:id="@+id/txtTotalCases"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.cases.total}"
@@ -247,7 +247,7 @@
 
             <TextView
                 android:id="@+id/lblDeaths"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:paddingStart="@dimen/dimen_8dp"
@@ -274,7 +274,7 @@
 
             <TextView
                 android:id="@+id/lblNewDeath"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/newDeath"
@@ -286,7 +286,7 @@
 
             <TextView
                 android:id="@+id/txtNewDeath"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.deaths.new}"
@@ -297,7 +297,7 @@
 
             <TextView
                 android:id="@+id/lblTotalDeaths"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/total"
@@ -309,7 +309,7 @@
 
             <TextView
                 android:id="@+id/txtTotalDeaths"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.deaths.total}"
@@ -334,7 +334,7 @@
 
             <TextView
                 android:id="@+id/lblTests"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:paddingStart="@dimen/dimen_8dp"
@@ -361,7 +361,7 @@
 
             <TextView
                 android:id="@+id/lblTotalTests"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@string/total"
@@ -373,7 +373,7 @@
 
             <TextView
                 android:id="@+id/txtTotalTests"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.tests.total}"
@@ -398,7 +398,7 @@
 
             <TextView
                 android:id="@+id/lblDate"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:padding="@dimen/dimen_8dp"
@@ -412,7 +412,7 @@
 
             <TextView
                 android:id="@+id/txtDate"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_8dp"
                 android:padding="@dimen/dimen_8dp"
