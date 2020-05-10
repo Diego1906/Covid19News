@@ -48,6 +48,10 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     val isVisibleCardViewItem
         get() = _isVisibleCardViewItem
 
+    private val _isShowData = MutableLiveData(true)
+    val isShowData
+        get() = _isShowData
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
@@ -58,6 +62,7 @@ class GenericViewModel(val repository: IRepository, application: Application) :
             onShowProgressBar(true)
             onCallRepository(filter, typeSearch)
             onIsVisibleCardViewItem(true)
+            onIsShowData(false)
             onShowProgressBar(false)
         }
     }
@@ -111,5 +116,9 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     private fun onIsVisible(value: Boolean) = when (value) {
         true -> View.VISIBLE
         else -> View.GONE
+    }
+
+    private fun onIsShowData(value: Boolean) {
+        _isShowData.value = value
     }
 }
