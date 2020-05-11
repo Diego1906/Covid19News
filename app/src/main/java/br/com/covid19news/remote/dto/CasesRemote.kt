@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Cases(
+data class CasesRemote(
     @Json(name = "new") val new: String?,
     @Json(name = "active") val active: String?,
     @Json(name = "critical") val critical: String?,

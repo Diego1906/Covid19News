@@ -8,9 +8,9 @@ import androidx.room.Query
 
 @Dao
 interface StatisticsDao {
+
     @Query(
-        "SELECT " +
-                "id, country, day, time, cases_active, cases_critical, cases_recovered, " +
+        "SELECT country, day, time, cases_active, cases_critical, cases_recovered, " +
                 "MAX(cases_total) as cases_total, deaths_total, tests_total " +
                 "FROM currentstatistics " +
                 "GROUP BY country, day " +

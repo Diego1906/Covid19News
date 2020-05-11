@@ -10,15 +10,16 @@ import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentAllCountriesBinding
 import br.com.covid19news.ui.adapter.AllCountriesAdapter
 import br.com.covid19news.ui.adapter.OnclickListener
+import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onIsNetworkConnected
 import br.com.covid19news.util.onNavigate
 import br.com.covid19news.util.onNotifyWithToast
-import br.com.covid19news.viewmodel.GenericViewModel2
+import br.com.covid19news.viewmodel.GenericViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllCountriesFragment : Fragment() {
 
-    private val viewModel: GenericViewModel2 by viewModel()
+    private val viewModel: GenericViewModel by viewModel()
     private val recyclerAdapter by lazy {
         AllCountriesAdapter(OnclickListener {
             this.onNavigate(
@@ -55,6 +56,6 @@ class AllCountriesFragment : Fragment() {
             viewModel.onShowToast(getString(R.string.no_internet_connection))
             return
         }
-        viewModel.onShowListData()
+        viewModel.onShowData(null, TypeSearch.Statistcs)
     }
 }

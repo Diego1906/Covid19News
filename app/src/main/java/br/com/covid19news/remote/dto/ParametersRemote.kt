@@ -5,6 +5,6 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Parameters(
+data class ParametersRemote(
     @Json(name = "country") val country: String?
 ) : Parcelable

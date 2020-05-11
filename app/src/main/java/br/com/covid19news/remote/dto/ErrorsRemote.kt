@@ -5,6 +5,6 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Tests(
-    @Json(name = "total") val total: String?
+data class ErrorsRemote(
+    @Json(name = "errors") val errors: String?
 ) : Parcelable

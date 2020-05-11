@@ -45,8 +45,16 @@ fun String.onFormatDateTime(): String {
     return newFormatedDate
 }
 
-fun String.removePrefix(): String {
-    return this.removePrefix(App.getContext().getString(R.string.str_plus))
+fun String?.onRemovePrefix(): String {
+    return this?.removePrefix("+") ?: this.onCheckDataReported()
+}
+
+fun String?.onCheckDataReported(): String {
+    return this ?: App.getContext().getString(R.string.data_not_reported)
+}
+
+fun onGetDateCalendar(): String {
+    return Calendar.getInstance().time.toString().onFormatDateTime()
 }
 
 fun Fragment.onIsNetworkConnected(): Boolean {

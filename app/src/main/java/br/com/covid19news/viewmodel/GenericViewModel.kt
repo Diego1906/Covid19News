@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.covid19news.R
 import br.com.covid19news.application.App
-import br.com.covid19news.domain.DataStatisticsModel
 import br.com.covid19news.domain.ResponseModel
+import br.com.covid19news.domain.StatisticsModel
 import br.com.covid19news.repository.IRepository
 import br.com.covid19news.util.TypeSearch
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +22,11 @@ private const val INDEX_ZERO = 0
 class GenericViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application), IGenericViewModel {
 
+    val responseList = repository.responses
+
     private val TAG = javaClass.simpleName
 
-    private val _data = MutableLiveData<DataStatisticsModel>()
+    private val _data = MutableLiveData<StatisticsModel>()
     val data
         get() = _data
 
@@ -70,9 +72,7 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     private suspend fun onCallRepository(filter: String?, typeSearch: TypeSearch) {
         withContext(Dispatchers.IO) {
             try {
-                _data.postValue(
-                    onChooseOptionSearch(filter, typeSearch)
-                )
+                onChooseOptionSearch(filter, typeSearch)
             } catch (ex: Throwable) {
                 Timber.tag(TAG)
                 Timber.e(ex)
@@ -85,15 +85,21 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         when (typeSearch) {
             TypeSearch.All, TypeSearch.Country -> {
                 filter?.let {
-                    repository.getStatusWorldOrByCountry(it)
+                    _data.postValue(repository.getStatisticsWorldOrByCountry(it))
                 }
             }
             TypeSearch.Statistcs -> {
-                repository.getStatusAllCountries()
+                onRefreshStatisticsList()
             }
         }
 
-    override fun onSetResponse(data: DataStatisticsModel) {
+    private suspend fun onRefreshStatisticsList() {
+        if (repository.responses.value == null) {
+            repository.refreshStatisticsAllCountries()
+        }
+    }
+
+    override fun onSetResponse(data: StatisticsModel) {
         _response.value = data.listResponse?.get(INDEX_ZERO)
     }
 

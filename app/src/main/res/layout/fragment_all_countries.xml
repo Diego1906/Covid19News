@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="br.com.covid19news.viewmodel.GenericViewModel2" />
+            type="br.com.covid19news.viewmodel.GenericViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

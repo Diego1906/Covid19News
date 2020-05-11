@@ -9,53 +9,53 @@ import br.com.covid19news.domain.DeathsModel
 import br.com.covid19news.domain.ResponseModel
 import br.com.covid19news.domain.TestsModel
 
-@Entity(tableName = "currentstatistics", indices = [Index(value = ["id"], unique = true)])
+@Entity(
+    tableName = "currentstatistics", indices = [Index(value = ["country"], unique = true)]
+)
 data class ResponseEntity(
-    @PrimaryKey(autoGenerate = true) var id: Long = 0L,
-    var country: String? = null,
-    @Embedded(prefix = "cases_") var cases: CasesEntity? = null,
-    @Embedded(prefix = "deaths_") var deaths: DeathsEntity? = null,
-    @Embedded(prefix = "tests_") var tests: TestsEntity? = null,
-    var day: String? = null,
-    var time: String? = null
+    @PrimaryKey var country: String,
+    @Embedded(prefix = "cases_") var cases: CasesEntity,
+    @Embedded(prefix = "deaths_") var deaths: DeathsEntity,
+    @Embedded(prefix = "tests_") var tests: TestsEntity,
+    var day: String,
+    var time: String
 )
 
 data class CasesEntity(
-    var new: String? = null,
-    var active: String? = null,
-    var critical: String? = null,
-    var recovered: String? = null,
-    var total: String? = null
+    var new: String = "",
+    var active: String = "",
+    var critical: String = "",
+    var recovered: String = "",
+    var total: String = ""
 )
 
 data class DeathsEntity(
-    var new: String? = null,
-    var total: String? = null
+    var new: String = "",
+    var total: String = ""
 )
 
 data class TestsEntity(
-    var total: String? = null
+    var total: String = ""
 )
 
 // Convert from database objects to model objects
 fun List<ResponseEntity>.asDomainModel(): List<ResponseModel> {
     return map {
         ResponseModel(
-            country = it.country
-            ,
+            country = it.country,
             cases = CasesModel(
-                new = it.cases?.new,
-                active = it.cases?.active,
-                critical = it.cases?.critical,
-                recovered = it.cases?.recovered,
-                total = it.cases?.total
+                new = it.cases.new,
+                active = it.cases.active,
+                critical = it.cases.critical,
+                recovered = it.cases.recovered,
+                total = it.cases.total
             ),
             deaths = DeathsModel(
-                new = it.deaths?.new,
-                total = it.deaths?.total
+                new = it.deaths.new,
+                total = it.deaths.total
             ),
             tests = TestsModel(
-                total = it.tests?.total
+                total = it.tests.total
             ),
             day = it.day,
             time = it.time

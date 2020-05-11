@@ -20,7 +20,7 @@
     <string name="pattern_date_api">yyyy-MM-dd\'T\'hh:mm:ss</string>
     <string name="pattern_date_pt_br">dd.MM.yyyy HH:mm:ss</string>
     <string name="time_zone_gmt">GMT</string>
-    <string name="quantity_not_reported">Não informado</string>
+    <string name="data_not_reported">Não informado</string>
     <string name="all">TODOS</string>
     <string name="str_plus">+</string>
     <string name="no_internet_connection">Sem conexão com a internet</string>
