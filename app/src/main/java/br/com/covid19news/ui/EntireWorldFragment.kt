@@ -10,6 +10,7 @@ import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.util.onToUpperCase
 import br.com.covid19news.viewmodel.GenericViewModel
 import kotlinx.android.synthetic.main.fragment_entire_world.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,12 +31,6 @@ class EntireWorldFragment : Fragment() {
             it?.onNotifyWithToast(Pair(requireContext(), viewModel))
         })
 
-        viewModel.data.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                viewModel.onSetResponse(it)
-            }
-        })
-
         viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
             swipeRefreshEntireWorld.isRefreshing = it
         })
@@ -52,7 +47,7 @@ class EntireWorldFragment : Fragment() {
 
     private fun onShowData() {
         this.onCheckInternetAndShowData(
-            Triple(viewModel, TypeSearch.All.name, TypeSearch.All), true
+            Triple(viewModel, TypeSearch.All.name.onToUpperCase(), TypeSearch.All), true
         )
     }
 }

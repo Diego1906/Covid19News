@@ -4,26 +4,24 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class StatisticsModel(
+data class StatisticsDomainModel(
     val get: String,
-    //val parameters: List<ParametersModel>,
-    //val errors: List<ErrorsModel>,
     val results: String,
-    val listResponse: List<ResponseModel>?
+    val listResponse: List<ResponseDomainModel>
 ) : Parcelable
 
 @Parcelize
-data class ResponseModel(
+data class ResponseDomainModel(
     val country: String,
-    val cases: CasesModel,
-    val deaths: DeathsModel,
-    val tests: TestsModel,
+    val cases: CasesDomainModel,
+    val deaths: DeathsDomainModel,
+    val tests: TestsDomainModel,
     val day: String,
     val time: String
 ) : Parcelable
 
 @Parcelize
-data class CasesModel(
+data class CasesDomainModel(
     val new: String,
     val active: String,
     val critical: String,
@@ -32,25 +30,12 @@ data class CasesModel(
 ) : Parcelable
 
 @Parcelize
-data class DeathsModel(
+data class DeathsDomainModel(
     val new: String,
     val total: String
 ) : Parcelable
 
 @Parcelize
-data class TestsModel(
+data class TestsDomainModel(
     val total: String
 ) : Parcelable
-
-@Parcelize
-data class ParametersModel(
-    val country: String
-) : Parcelable
-
-@Parcelize
-data class ErrorsModel(
-    val errors: String
-) : Parcelable
-
-
-

@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import br.com.covid19news.R
 import br.com.covid19news.application.App
-import br.com.covid19news.domain.ResponseModel
-import br.com.covid19news.domain.StatisticsModel
+import br.com.covid19news.domain.ResponseDomainModel
 import br.com.covid19news.repository.IRepository
 import br.com.covid19news.util.TypeSearch
 import kotlinx.coroutines.Dispatchers
@@ -17,20 +16,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-private const val INDEX_ZERO = 0
-
 class GenericViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application), IGenericViewModel {
 
-    val responseList = repository.responses
-
     private val TAG = javaClass.simpleName
 
-    private val _data = MutableLiveData<StatisticsModel>()
-    val data
-        get() = _data
+    val responseList = repository.responses
 
-    private val _response = MutableLiveData<ResponseModel>()
+    private val _response = MutableLiveData<ResponseDomainModel>()
     val response
         get() = _response
 
@@ -50,10 +43,6 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     val isVisibleCardViewItem
         get() = _isVisibleCardViewItem
 
-    private val _isShowData = MutableLiveData(true)
-    val isShowData
-        get() = _isShowData
-
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()
@@ -63,9 +52,8 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         viewModelScope.launch {
             onShowProgressBar(true)
             onCallRepository(filter, typeSearch)
-            onIsVisibleCardViewItem(true)
-            onIsShowData(false)
             onShowProgressBar(false)
+            onShowCardViewItem()
         }
     }
 
@@ -85,23 +73,13 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         when (typeSearch) {
             TypeSearch.All, TypeSearch.Country -> {
                 filter?.let {
-                    _data.postValue(repository.getStatisticsWorldOrByCountry(it))
+                    _response.postValue(repository.getStatisticsWorldOrByCountry(it))
                 }
             }
             TypeSearch.Statistcs -> {
-                onRefreshStatisticsList()
+                repository.refreshStatisticsAllCountries()
             }
         }
-
-    private suspend fun onRefreshStatisticsList() {
-        if (repository.responses.value == null) {
-            repository.refreshStatisticsAllCountries()
-        }
-    }
-
-    override fun onSetResponse(data: StatisticsModel) {
-        _response.value = data.listResponse?.get(INDEX_ZERO)
-    }
 
     private fun onShowProgressBar(value: Boolean) {
         _isVisibleProgressBar.value = onIsVisible(value)
@@ -115,16 +93,12 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         _swipeIsRefreshing.value = false
     }
 
-    override fun onIsVisibleCardViewItem(value: Boolean) {
-        _isVisibleCardViewItem.value = onIsVisible(value)
+    private fun onShowCardViewItem() {
+        _isVisibleCardViewItem.value = onIsVisible(true)
     }
 
     private fun onIsVisible(value: Boolean) = when (value) {
         true -> View.VISIBLE
         else -> View.GONE
-    }
-
-    private fun onIsShowData(value: Boolean) {
-        _isShowData.value = value
     }
 }

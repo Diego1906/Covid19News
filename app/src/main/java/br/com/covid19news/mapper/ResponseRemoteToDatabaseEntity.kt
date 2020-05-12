@@ -1,26 +1,30 @@
-package br.com.covid19news.remote.dto
+package br.com.covid19news.mapper
 
+import br.com.covid19news.R
+import br.com.covid19news.application.App
 import br.com.covid19news.data.CasesEntity
 import br.com.covid19news.data.DeathsEntity
 import br.com.covid19news.data.ResponseEntity
 import br.com.covid19news.data.TestsEntity
-import br.com.covid19news.util.onCheckDataReported
-import br.com.covid19news.util.onFormatDateTime
-import br.com.covid19news.util.onGetDateCalendar
+import br.com.covid19news.remote.dto.StatisticsRemote
+import br.com.covid19news.util.*
 
 fun StatisticsRemote.asDatabaseModel(): Array<ResponseEntity> {
     return listResponseRemote.map {
         ResponseEntity(
-            country = it.country.onCheckDataReported(),
+            country = when (it.country) {
+                TypeSearch.All.name -> App.getContext().getString(R.string.all).onToUpperCase()
+                else -> it.country?.trim()?.onToUpperCase()
+            } ?: it.country.onCheckDataReported(),
             cases = CasesEntity(
-                new = it.cases.new.onCheckDataReported(),
+                newer = it.cases.new.onRemovePrefix(),
                 active = it.cases.active.onCheckDataReported(),
                 critical = it.cases.critical.onCheckDataReported(),
                 recovered = it.cases.recovered.onCheckDataReported(),
                 total = it.cases.total.onCheckDataReported()
             ),
             deaths = DeathsEntity(
-                new = it.deaths.new.onCheckDataReported(),
+                newer = it.deaths.new.onRemovePrefix(),
                 total = it.deaths.total.onCheckDataReported()
             ),
             tests = TestsEntity(
@@ -31,4 +35,3 @@ fun StatisticsRemote.asDatabaseModel(): Array<ResponseEntity> {
         )
     }.toTypedArray()
 }
-

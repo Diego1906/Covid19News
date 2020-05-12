@@ -21,7 +21,7 @@
     <string name="pattern_date_pt_br">dd.MM.yyyy HH:mm:ss</string>
     <string name="time_zone_gmt">GMT</string>
     <string name="data_not_reported">Não informado</string>
-    <string name="all">TODOS</string>
+    <string name="all">All</string>
     <string name="str_plus">+</string>
     <string name="no_internet_connection">Sem conexão com a internet</string>
     <string name="search">Pesquisar</string>
@@ -50,21 +50,21 @@
 
     <!-- List of the countries that will be using in the search by current status as filter -->
     <string-array name="filterCountries">
-        <item>"germany"</item>
-        <item>"australia"</item>
-        <item>"belgium"</item>
-        <item>"brazil"</item>
-        <item>"canada"</item>
-        <item>"china"</item>
-        <item>"spain"</item>
-        <item>"usa"</item>
-        <item>"france"</item>
-        <item>"india"</item>
-        <item>"ireland"</item>
-        <item>"israel"</item>
-        <item>"italy"</item>
-        <item>"japan"</item>
-        <item>"portugal"</item>
-        <item>"uk"</item>
+        <item>"GERMANY"</item>
+        <item>"AUSTRALIA"</item>
+        <item>"BELGIUM"</item>
+        <item>"BRAZIL"</item>
+        <item>"CANADA"</item>
+        <item>"CHINA"</item>
+        <item>"SPAIN"</item>
+        <item>"USA"</item>
+        <item>"FRANCE"</item>
+        <item>"INDIA"</item>
+        <item>"IRELAND"</item>
+        <item>"ISRAEL"</item>
+        <item>"ITALY"</item>
+        <item>"JAPAN"</item>
+        <item>"PORTUGAL"</item>
+        <item>"UK"</item>
     </string-array>
 </resources>

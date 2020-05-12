@@ -14,9 +14,9 @@ abstract class AppDatabase : RoomDatabase() {
 
         private lateinit var INSTANCE: AppDatabase
 
-        fun getDatabase(context: Context): AppDatabase {
+        fun getInstance(context: Context): AppDatabase {
             synchronized(AppDatabase::class.java) {
-                if (::INSTANCE.isInitialized.not()) {
+                if (!::INSTANCE.isInitialized) {
                     INSTANCE = Room.databaseBuilder(
                         context,
                         AppDatabase::class.java,

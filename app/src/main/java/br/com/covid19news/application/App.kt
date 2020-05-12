@@ -27,7 +27,7 @@ class App : Application() {
 
         fun setContext(context: Context) {
             synchronized(App::class.java) {
-                if (!Companion::INSTANCE.isInitialized) {
+                if (!::INSTANCE.isInitialized) {
                     INSTANCE = context
                 }
             }

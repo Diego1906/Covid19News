@@ -53,6 +53,8 @@ fun String?.onCheckDataReported(): String {
     return this ?: App.getContext().getString(R.string.data_not_reported)
 }
 
+fun String.onToUpperCase() = this.toUpperCase(Locale.getDefault())
+
 fun onGetDateCalendar(): String {
     return Calendar.getInstance().time.toString().onFormatDateTime()
 }

@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.covid19news.databinding.ItemListCountriesBinding
-import br.com.covid19news.domain.ResponseModel
+import br.com.covid19news.domain.ResponseDomainModel
 
 class AllCountriesAdapter(private val onclickListener: OnclickListener) :
-    ListAdapter<ResponseModel, ItemHolder>(DiffCallback) {
+    ListAdapter<ResponseDomainModel, ItemHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.from(parent)
@@ -27,7 +27,7 @@ class AllCountriesAdapter(private val onclickListener: OnclickListener) :
 class ItemHolder private constructor(private val binding: ItemListCountriesBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(response: ResponseModel) {
+    fun bind(response: ResponseDomainModel) {
         binding.response = response
         binding.executePendingBindings()
     }
@@ -41,16 +41,20 @@ class ItemHolder private constructor(private val binding: ItemListCountriesBindi
     }
 }
 
-object DiffCallback : DiffUtil.ItemCallback<ResponseModel>() {
-    override fun areItemsTheSame(oldItem: ResponseModel, newItem: ResponseModel): Boolean {
+object DiffCallback : DiffUtil.ItemCallback<ResponseDomainModel>() {
+    override fun areItemsTheSame(
+        oldItem: ResponseDomainModel, newItem: ResponseDomainModel
+    ): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: ResponseModel, newItem: ResponseModel): Boolean {
-        return oldItem.country == newItem.country && oldItem.cases?.total == newItem.cases?.total
+    override fun areContentsTheSame(
+        oldItem: ResponseDomainModel, newItem: ResponseDomainModel
+    ): Boolean {
+        return oldItem.country == newItem.country && oldItem.cases.total == newItem.cases.total
     }
 }
 
-class OnclickListener(private val block: (ResponseModel) -> Unit) {
-    fun onClick(response: ResponseModel) = block.invoke(response)
+class OnclickListener(private val block: (ResponseDomainModel) -> Unit) {
+    fun onClick(response: ResponseDomainModel) = block.invoke(response)
 }

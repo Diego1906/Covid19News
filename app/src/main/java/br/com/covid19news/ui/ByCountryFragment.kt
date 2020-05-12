@@ -35,12 +35,6 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
             it?.onNotifyWithToast(Pair(requireContext(), viewModel))
         })
 
-        viewModel.data.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                viewModel.onSetResponse(it)
-            }
-        })
-
         return binding.root
     }
 

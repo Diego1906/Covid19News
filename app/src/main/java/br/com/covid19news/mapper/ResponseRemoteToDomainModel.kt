@@ -6,27 +6,25 @@ import br.com.covid19news.domain.*
 import br.com.covid19news.remote.dto.*
 import br.com.covid19news.util.*
 
-fun StatisticsRemote.mapToModel() = StatisticsModel(
+fun StatisticsRemote.mapToDomainModel() = StatisticsDomainModel(
     get = this.get.onCheckDataReported(),
-    //parameters = this.parameters.map { it.mapToModel() },
-    //errors = this.errors.map { it.mapToModel() },
     results = this.results.onCheckDataReported(),
-    listResponse = this.listResponseRemote?.map { it.mapToModel() }
+    listResponse = this.listResponseRemote.map { it.mapToDomainModel() }
 )
 
-fun ResponseRemote.mapToModel() = ResponseModel(
+fun ResponseRemote.mapToDomainModel() = ResponseDomainModel(
     country = when (this.country) {
-        TypeSearch.All.name -> App.getContext().getString(R.string.all)
-        else -> this.country
+        TypeSearch.All.name -> App.getContext().getString(R.string.entire_world).onToUpperCase()
+        else -> this.country?.trim()?.onToUpperCase()
     } ?: this.country.onCheckDataReported(),
-    cases = this.cases.mapToModel(),
-    deaths = this.deaths.mapToModel(),
-    tests = this.tests.mapToModel(),
+    cases = this.cases.mapToDomainModel(),
+    deaths = this.deaths.mapToDomainModel(),
+    tests = this.tests.mapToDomainModel(),
     day = this.day.onCheckDataReported(),
     time = this.time?.onFormatDateTime() ?: onGetDateCalendar()
 )
 
-fun CasesRemote.mapToModel() = CasesModel(
+fun CasesRemote.mapToDomainModel() = CasesDomainModel(
     new = this.new.onRemovePrefix(),
     active = this.active.onCheckDataReported(),
     critical = this.critical.onCheckDataReported(),
@@ -34,20 +32,11 @@ fun CasesRemote.mapToModel() = CasesModel(
     total = this.total.onCheckDataReported()
 )
 
-fun DeathsRemote.mapToModel() = DeathsModel(
+fun DeathsRemote.mapToDomainModel() = DeathsDomainModel(
     new = this.new.onRemovePrefix(),
     total = this.total.onCheckDataReported()
 )
 
-fun TestsRemote.mapToModel() = TestsModel(
+fun TestsRemote.mapToDomainModel() = TestsDomainModel(
     total = this.total.onCheckDataReported()
 )
-
-fun ParametersRemote.mapToModel() = ParametersModel(
-    country = this.country.onCheckDataReported()
-)
-
-fun ErrorsRemote.mapToModel() = ErrorsModel(
-    errors = this.errors.onCheckDataReported()
-)
-

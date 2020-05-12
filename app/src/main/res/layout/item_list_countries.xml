@@ -7,7 +7,7 @@
 
         <variable
             name="response"
-            type="br.com.covid19news.domain.ResponseModel" />
+            type="br.com.covid19news.domain.ResponseDomainModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -64,9 +64,9 @@
                 android:id="@+id/txtCountryItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="start"
                 android:padding="@dimen/dimen_8dp"
                 android:text="@{response.country}"
-                android:textAlignment="viewStart"
                 android:textSize="@dimen/dimen_24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

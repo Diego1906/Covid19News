@@ -17,7 +17,7 @@ val appModule = module {
     single<IRepository> {
         Repository(
             service = get(),
-            database = AppDatabase.getDatabase(androidApplication().applicationContext)
+            database = AppDatabase.getInstance(androidApplication().applicationContext)
         )
     }
     single<IService> { Service() }

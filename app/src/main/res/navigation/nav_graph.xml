@@ -12,13 +12,25 @@
         tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_startFragment_to_entireWorldFragment"
-            app:destination="@id/entireWorldFragment" />
+            app:destination="@id/entireWorldFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_startFragment_to_byCountryFragment"
-            app:destination="@id/byCountryFragment" />
+            app:destination="@id/byCountryFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_startFragment_to_allCountriesFragment"
-            app:destination="@id/allCountriesFragment" />
+            app:destination="@id/allCountriesFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/entireWorldFragment"
@@ -50,6 +62,6 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="response"
-            app:argType="br.com.covid19news.domain.ResponseModel" />
+            app:argType="br.com.covid19news.domain.ResponseDomainModel" />
     </fragment>
 </navigation>

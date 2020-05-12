@@ -6,7 +6,7 @@
 
     <color name="colorGray300">#E0E0E0</color>
 
-    <color name="colorBlueGreyPrimary">#78909c</color>
-    <color name="colorBlueGreyDark">#4b636e</color>
-    <color name="colorBlueGreyLight">#a7c0cd</color>
+    <color name="colorBlueGreyPrimary">#263238</color>
+    <color name="colorBlueGreyDark">#000a12</color>
+    <color name="colorBlueGreyLight">#4f5b62</color>
 </resources>

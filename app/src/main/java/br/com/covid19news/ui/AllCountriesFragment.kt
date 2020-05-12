@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentAllCountriesBinding
 import br.com.covid19news.ui.adapter.AllCountriesAdapter
 import br.com.covid19news.ui.adapter.OnclickListener
 import br.com.covid19news.util.TypeSearch
-import br.com.covid19news.util.onIsNetworkConnected
+import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onNavigate
 import br.com.covid19news.util.onNotifyWithToast
 import br.com.covid19news.viewmodel.GenericViewModel
+import kotlinx.android.synthetic.main.fragment_all_countries.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AllCountriesFragment : Fragment() {
@@ -42,6 +42,10 @@ class AllCountriesFragment : Fragment() {
             it?.onNotifyWithToast(Pair(requireContext(), viewModel))
         })
 
+        viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
+            swipeRefreshAllCountries.isRefreshing = it
+        })
+
         return binding.root
     }
 
@@ -52,10 +56,8 @@ class AllCountriesFragment : Fragment() {
     }
 
     private fun onShowData() {
-        if (onIsNetworkConnected().not()) {
-            viewModel.onShowToast(getString(R.string.no_internet_connection))
-            return
-        }
-        viewModel.onShowData(null, TypeSearch.Statistcs)
+        this.onCheckInternetAndShowData(
+            Triple(viewModel, null, TypeSearch.Statistcs), true
+        )
     }
 }
