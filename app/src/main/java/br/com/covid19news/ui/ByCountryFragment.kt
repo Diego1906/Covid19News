@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentByCountryBinding
 import br.com.covid19news.util.TypeSearch
-import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onNotifyWithToast
 import br.com.covid19news.viewmodel.GenericViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,6 +32,15 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
             it?.onNotifyWithToast(Pair(requireContext(), viewModel))
+        })
+
+        viewModel.isNotNetworkConnected.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    viewModel.onShowToast(getString(R.string.no_internet_connection))
+                    viewModel.onIsNotNetworkConnectedComplete()
+                }
+            }
         })
 
         return binding.root
@@ -66,6 +74,6 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun onShowData() {
-        this.onCheckInternetAndShowData(Triple(viewModel, filter, TypeSearch.Country))
+        viewModel.onShowData(Triple(false, filter, TypeSearch.Country))
     }
 }

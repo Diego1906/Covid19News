@@ -17,11 +17,13 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class GenericViewModel(val repository: IRepository, application: Application) :
-    AndroidViewModel(application), IGenericViewModel {
+    AndroidViewModel(application), IBaseViewModel {
 
     private val TAG = javaClass.simpleName
 
     val responseList = repository.responses
+
+    val isNotNetworkConnected = repository.isNotNetworkConnected
 
     private val _response = MutableLiveData<ResponseDomainModel>()
     val response
@@ -48,12 +50,18 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         viewModelScope.cancel()
     }
 
-    override fun onShowData(filter: String?, typeSearch: TypeSearch) {
+    fun onShowData(params: Triple<Boolean, String?, TypeSearch>) {
+        if (params.first)
+            onHideSwipeRefresh()
+
+        onFetchData(params.second, params.third)
+    }
+
+    private fun onFetchData(filter: String?, typeSearch: TypeSearch) {
         viewModelScope.launch {
             onShowProgressBar(true)
             onCallRepository(filter, typeSearch)
             onShowProgressBar(false)
-            onShowCardViewItem()
         }
     }
 
@@ -72,8 +80,15 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     private suspend fun onChooseOptionSearch(filter: String?, typeSearch: TypeSearch) =
         when (typeSearch) {
             TypeSearch.All, TypeSearch.Country -> {
-                filter?.let {
-                    _response.postValue(repository.getStatisticsWorldOrByCountry(it))
+                filter?.let { value ->
+                    repository.getStatisticsWorldOrByCountry(value).run {
+                        if (this.first) {
+                            this.second?.let {
+                                _response.postValue(it as? ResponseDomainModel)
+                                onShowCardViewItem()
+                            }
+                        }
+                    }
                 }
             }
             TypeSearch.Statistcs -> {
@@ -89,16 +104,20 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         _toast.postValue(value)
     }
 
-    override fun onHideSwipeRefresh() {
+    private fun onHideSwipeRefresh() {
         _swipeIsRefreshing.value = false
     }
 
     private fun onShowCardViewItem() {
-        _isVisibleCardViewItem.value = onIsVisible(true)
+        _isVisibleCardViewItem.postValue(onIsVisible(true))
     }
 
     private fun onIsVisible(value: Boolean) = when (value) {
         true -> View.VISIBLE
         else -> View.GONE
+    }
+
+    fun onIsNotNetworkConnectedComplete() {
+        repository.onIsNotConnectedComplete()
     }
 }

@@ -18,6 +18,9 @@ interface StatisticsDao {
     @Query("SELECT count(*) FROM currentstatistics WHERE country = :country ")
     fun getCountResult(country: String): Int
 
+    @Query("SELECT count(*) FROM currentstatistics")
+    fun getCountTotalResult(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg response: ResponseEntity)
 }

@@ -7,7 +7,11 @@ interface IRepository {
 
     val responses: LiveData<List<ResponseDomainModel>>
 
-    suspend fun getStatisticsWorldOrByCountry(filter: String): ResponseDomainModel
+    val isNotNetworkConnected: LiveData<Boolean>
+
+    suspend fun getStatisticsWorldOrByCountry(filter: String): Pair<Boolean, Any?>
 
     suspend fun refreshStatisticsAllCountries()
+
+    fun onIsNotConnectedComplete()
 }

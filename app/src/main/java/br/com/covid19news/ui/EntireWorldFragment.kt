@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
 import br.com.covid19news.util.TypeSearch
-import br.com.covid19news.util.onCheckInternetAndShowData
 import br.com.covid19news.util.onNotifyWithToast
 import br.com.covid19news.util.onToUpperCase
 import br.com.covid19news.viewmodel.GenericViewModel
@@ -35,6 +35,15 @@ class EntireWorldFragment : Fragment() {
             swipeRefreshEntireWorld.isRefreshing = it
         })
 
+        viewModel.isNotNetworkConnected.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    viewModel.onShowToast(getString(R.string.no_internet_connection))
+                    viewModel.onIsNotNetworkConnectedComplete()
+                }
+            }
+        })
+
         return binding.root
     }
 
@@ -46,8 +55,6 @@ class EntireWorldFragment : Fragment() {
     }
 
     private fun onShowData() {
-        this.onCheckInternetAndShowData(
-            Triple(viewModel, TypeSearch.All.name.onToUpperCase(), TypeSearch.All), true
-        )
+        viewModel.onShowData(Triple(true, TypeSearch.All.name.onToUpperCase(), TypeSearch.All))
     }
 }

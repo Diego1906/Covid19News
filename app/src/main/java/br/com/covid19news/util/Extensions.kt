@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import br.com.covid19news.R
 import br.com.covid19news.application.App
 import br.com.covid19news.viewmodel.IBaseViewModel
-import br.com.covid19news.viewmodel.IGenericViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -59,23 +58,9 @@ fun onGetDateCalendar(): String {
     return Calendar.getInstance().time.toString().onFormatDateTime()
 }
 
-fun Fragment.onIsNetworkConnected(): Boolean {
-    val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    return cm.activeNetworkInfo?.isConnectedOrConnecting == true
-}
-
-fun Fragment.onCheckInternetAndShowData(
-    params: Triple<IGenericViewModel, String?, TypeSearch>,
-    isHideSwipe: Boolean = false
-) {
-    if (isHideSwipe)
-        params.first.onHideSwipeRefresh()
-
-    if (onIsNetworkConnected().not()) {
-        params.first.onShowToast(getString(R.string.no_internet_connection))
-        return
-    }
-    params.first.onShowData(params.second, params.third)
+fun Context.onIsNetworkConnected(): Boolean {
+    val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+    return cm?.activeNetworkInfo?.isConnectedOrConnecting == true
 }
 
 fun Fragment.onNavigate(directions: NavDirections) {
