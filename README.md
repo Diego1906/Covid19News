@@ -1,6 +1,7 @@
 # App Covid-19 News
 
 O aplicativo consome uma API REST para buscar as estatísticas sobre a doença Covid-19 o [Coronavírus](https://pt.wikipedia.org/wiki/Coronav%C3%ADrus).
+
 API utilizada [Covid-19 API](https://api-sports.io/documentation/covid-19) 
 
 **O aplicativo possui quatro telas e elas são:**
