@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/statistics">
+        <menu>
+            <item
+                android:id="@+id/entireWorld"
+                android:title="@string/entire_world" />
+            <item
+                android:id="@+id/byCountry"
+                android:title="@string/by_country" />
+            <item
+                android:id="@+id/allCountries"
+                android:title="@string/all_countries" />
+        </menu>
+    </item>
+</menu>

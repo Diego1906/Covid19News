@@ -1,7 +1,8 @@
-package br.com.covid19news
+package br.com.covid19news.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import br.com.covid19news.R
 
 class MainActivity : AppCompatActivity() {
 

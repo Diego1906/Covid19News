@@ -1,3 +1,70 @@
 <resources>
-    <string name="app_name">Covid19News</string>
+    <string name="app_name">Covid-19 News</string>
+    <string name="country">País</string>
+    <string name="cases">Casos</string>
+    <string name="newCase">Novos:</string>
+    <string name="active">Ativos:</string>
+    <string name="critical">Críticos:</string>
+    <string name="recovered">Recuperados:</string>
+    <string name="total">Total:</string>
+    <string name="deaths">Mortes</string>
+    <string name="newDeath">Novas:</string>
+    <string name="tests">Testes</string>
+    <string name="date">Data</string>
+    <string name="statistics">Estatísticas</string>
+    <string name="entire_world">Mundo Inteiro</string>
+    <string name="by_country">Por País</string>
+    <string name="all_countries">Todos Países</string>
+    <string name="image_do_coronavirus">Image do coronavirus</string>
+    <string name="description_entire_world">As informações abaixo são referentes a consolidação dos dados estatísticos do mundo inteiro.</string>
+    <string name="pattern_date_api">yyyy-MM-dd\'T\'hh:mm:ss</string>
+    <string name="pattern_date_pt_br">dd.MM.yyyy HH:mm:ss</string>
+    <string name="time_zone_gmt">GMT</string>
+    <string name="data_not_reported">Não informado</string>
+    <string name="all">All</string>
+    <string name="str_plus">+</string>
+    <string name="no_internet_connection">Sem conexão com a internet</string>
+    <string name="search">Pesquisar</string>
+    <string name="msg_error">Houve uma falha\nDetalhes: %s</string>
+    <string name="select_one_country">Selecione um País:</string>
+
+    <!-- List of the countries used in the spinner -->
+    <string-array name="listCountries">
+        <item>ALEMANHA</item>
+        <item>AUSTRÁLIA</item>
+        <item>BÉLGICA</item>
+        <item>BRASIL</item>
+        <item>CANADÁ</item>
+        <item>CHINA</item>
+        <item>ESPANHA</item>
+        <item>ESTADOS UNIDOS</item>
+        <item>FRANÇA</item>
+        <item>ÍNDIA</item>
+        <item>IRLANDA</item>
+        <item>ISRAEL</item>
+        <item>ITÁLIA</item>
+        <item>JAPÃO</item>
+        <item>PORTUGAL</item>
+        <item>REINO UNIDO</item>
+    </string-array>
+
+    <!-- List of the countries that will be using in the search by current status as filter -->
+    <string-array name="filterCountries">
+        <item>"GERMANY"</item>
+        <item>"AUSTRALIA"</item>
+        <item>"BELGIUM"</item>
+        <item>"BRAZIL"</item>
+        <item>"CANADA"</item>
+        <item>"CHINA"</item>
+        <item>"SPAIN"</item>
+        <item>"USA"</item>
+        <item>"FRANCE"</item>
+        <item>"INDIA"</item>
+        <item>"IRELAND"</item>
+        <item>"ISRAEL"</item>
+        <item>"ITALY"</item>
+        <item>"JAPAN"</item>
+        <item>"PORTUGAL"</item>
+        <item>"UK"</item>
+    </string-array>
 </resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.StartFragment">
+
+    <ImageView
+        android:id="@+id/image_corona_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_24dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_lab_test"
+        android:text="@string/description_entire_world"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_corona_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:layout_marginEnd="@dimen/dimen_24dp"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_mask_wearing"
+        android:text="@string/description_entire_world"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_corona_03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_24dp"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_hygiene"
+        android:text="@string/description_entire_world"
+        app:layout_constraintBottom_toBottomOf="@id/image_corona_04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_corona_04" />
+
+    <ImageView
+        android:id="@+id/image_corona_04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_calendar"
+        android:text="@string/description_entire_world"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image_corona_05"
+        app:layout_constraintStart_toEndOf="@id/image_corona_03"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_corona_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_24dp"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_virus"
+        android:text="@string/description_entire_world"
+        app:layout_constraintBottom_toBottomOf="@id/image_corona_04"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_corona_04" />
+
+    <ImageView
+        android:id="@+id/image_corona_06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_24dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_fever"
+        android:text="@string/description_entire_world"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_corona_07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_24dp"
+        android:layout_marginBottom="@dimen/dimen_16dp"
+        android:contentDescription="@string/image_do_coronavirus"
+        android:src="@drawable/ic_respiratory_infection"
+        android:text="@string/description_entire_world"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

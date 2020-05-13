@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.ByCountryFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="br.com.covid19news.viewmodel.GenericViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideByCountryBegin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/dimen_8dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideByCountryEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/dimen_8dp" />
+
+        <TextView
+            android:id="@+id/lblPais"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:padding="@dimen/dimen_12dp"
+            android:text="@string/select_one_country"
+            app:layout_constraintEnd_toStartOf="@id/spinnerCountry"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="@id/guideByCountryBegin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinnerCountry"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_48dp"
+            app:layout_constraintBottom_toBottomOf="@id/lblPais"
+            app:layout_constraintEnd_toEndOf="@id/guideByCountryEnd"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/lblPais"
+            app:layout_constraintTop_toTopOf="@id/lblPais" />
+
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="@dimen/dimen_64dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:background="@drawable/gradient_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/search"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@id/guideByCountryEnd"
+            app:layout_constraintStart_toStartOf="@id/guideByCountryBegin"
+            app:layout_constraintTop_toBottomOf="@id/spinnerCountry" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:visibility="@{viewModel.isVisibleCardViewItem}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideByCountryEnd"
+            app:layout_constraintStart_toStartOf="@id/guideByCountryBegin"
+            app:layout_constraintTop_toBottomOf="@id/buttonSearch">
+
+            <include
+                android:id="@+id/cardByCountry"
+                layout="@layout/item_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:response="@{viewModel.response}" />
+        </ScrollView>
+
+        <include
+            layout="@layout/view_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:isVisible="@{viewModel.isVisibleProgressBar}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

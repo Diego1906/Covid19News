@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="br.com.covid19news.ui.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_startFragment_to_entireWorldFragment"
+            app:destination="@id/entireWorldFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_startFragment_to_byCountryFragment"
+            app:destination="@id/byCountryFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_startFragment_to_allCountriesFragment"
+            app:destination="@id/allCountriesFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/entireWorldFragment"
+        android:name="br.com.covid19news.ui.EntireWorldFragment"
+        android:label="fragment_entire_world"
+        tools:layout="@layout/fragment_entire_world" />
+    <fragment
+        android:id="@+id/byCountryFragment"
+        android:name="br.com.covid19news.ui.ByCountryFragment"
+        android:label="fragment_by_country"
+        tools:layout="@layout/fragment_by_country" />
+    <fragment
+        android:id="@+id/allCountriesFragment"
+        android:name="br.com.covid19news.ui.AllCountriesFragment"
+        android:label="fragment_all_countries"
+        tools:layout="@layout/fragment_all_countries">
+        <action
+            android:id="@+id/action_allCountriesFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="br.com.covid19news.ui.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="response"
+            app:argType="br.com.covid19news.domain.ResponseDomainModel" />
+    </fragment>
+</navigation>
