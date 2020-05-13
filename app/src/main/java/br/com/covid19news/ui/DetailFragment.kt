@@ -18,7 +18,6 @@ class DetailFragment : Fragment() {
         binding.viewModel = DetailViewModel(
             DetailFragmentArgs.fromBundle(requireArguments()).response
         )
-
         return binding.root
     }
 }

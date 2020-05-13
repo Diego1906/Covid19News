@@ -28,14 +28,18 @@ class Repository(private val service: IService, private val database: AppDatabas
         if (totalResult()) {
             when (onIsNetworkConnected()) {
                 true -> {
-                    val statisticsRemote = service.getService().getStatisticsAllCountries()
-                    database.dao.insertAll(*statisticsRemote.asDatabaseModel())
+                    onRefreshDatabase()
                 }
                 else -> {
                     onIsNotConnected()
                 }
             }
         }
+    }
+
+    override suspend fun onRefreshDatabase() {
+        val statisticsRemote = service.getService().getStatisticsAllCountries()
+        database.dao.insertAll(*statisticsRemote.asDatabaseModel())
     }
 
     override suspend fun getStatisticsWorldOrByCountry(filter: String): Pair<Boolean, Any?> {

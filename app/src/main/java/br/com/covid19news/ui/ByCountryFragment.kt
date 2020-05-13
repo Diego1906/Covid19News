@@ -42,7 +42,6 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
             }
         })
-
         return binding.root
     }
 

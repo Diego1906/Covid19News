@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.TimeUnit
 
 class Service : IService {
 
@@ -15,6 +16,9 @@ class Service : IService {
 
     init {
         val client = OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 val request: Request = chain.request().newBuilder()
                     .addHeader(BuildConfig.HEADER_HOST_NAME, BuildConfig.HEADER_HOST_VALUE)

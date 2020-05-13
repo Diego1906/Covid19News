@@ -54,7 +54,6 @@ class AllCountriesFragment : Fragment() {
                 }
             }
         })
-
         return binding.root
     }
 

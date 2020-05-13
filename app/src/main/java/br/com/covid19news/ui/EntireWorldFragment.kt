@@ -43,7 +43,6 @@ class EntireWorldFragment : Fragment() {
                 }
             }
         })
-
         return binding.root
     }
 

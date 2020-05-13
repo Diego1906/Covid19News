@@ -13,5 +13,7 @@ interface IRepository {
 
     suspend fun refreshStatisticsAllCountries()
 
+    suspend fun onRefreshDatabase()
+
     fun onIsNotConnectedComplete()
 }

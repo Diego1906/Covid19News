@@ -11,7 +11,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val dao: StatisticsDao
 
     companion object {
-
         private lateinit var INSTANCE: AppDatabase
 
         fun getInstance(context: Context): AppDatabase {
