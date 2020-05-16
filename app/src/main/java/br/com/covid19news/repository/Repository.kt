@@ -25,15 +25,11 @@ class Repository(private val service: IService, private val database: AppDatabas
         }
 
     override suspend fun refreshStatisticsAllCountries() {
-        if (totalResult()) {
-            when (onIsNetworkConnected()) {
-                true -> {
-                    onRefreshDatabase()
-                }
-                else -> {
-                    onIsNotConnected()
-                }
-            }
+        if (database.dao.getCountTotalResult() == ZERO) {
+            if (App.getContext().onIsNetworkConnected())
+                onRefreshDatabase()
+            else
+                onIsNotConnected()
         }
     }
 
@@ -47,16 +43,13 @@ class Repository(private val service: IService, private val database: AppDatabas
         var isOk = true
         when (database.dao.getCountResult(filter)) {
             ZERO -> {
-                if (onIsNetworkConnected()) {
+                if (App.getContext().onIsNetworkConnected()) {
                     response = getReponseService(filter)
                 } else {
-                    isOk = false
-                    onIsNotConnected()
+                    isOk = false; onIsNotConnected()
                 }
             }
-            else -> {
-                response = getResponseDatabase(filter)
-            }
+            else -> response = getResponseDatabase(filter)
         }
         return Pair(isOk, response)
     }
@@ -70,10 +63,6 @@ class Repository(private val service: IService, private val database: AppDatabas
     private fun getResponseDatabase(filter: String): ResponseDomainModel {
         return database.dao.getByPrimaryKey(filter).mapToDomainModel()
     }
-
-    private fun totalResult() = database.dao.getCountTotalResult() == ZERO
-
-    private fun onIsNetworkConnected() = App.getContext().onIsNetworkConnected()
 
     private fun onIsNotConnected() {
         _isNotNetworkConnected.postValue(true)

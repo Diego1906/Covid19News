@@ -14,7 +14,9 @@ fun StatisticsRemote.mapToDomainModel() = StatisticsDomainModel(
 
 fun ResponseRemote.mapToDomainModel() = ResponseDomainModel(
     country = when (this.country) {
-        TypeSearch.All.name -> App.getContext().getString(R.string.entire_world).onToUpperCase()
+        App.getContext().getString(R.string.all) -> {
+            App.getContext().getString(R.string.entire_world).onToUpperCase()
+        }
         else -> this.country?.trim()?.onToUpperCase()
     } ?: this.country.onCheckDataReported(),
     cases = this.cases.mapToDomainModel(),

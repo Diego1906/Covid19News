@@ -9,17 +9,19 @@ import br.com.covid19news.R
 import br.com.covid19news.application.App
 import br.com.covid19news.domain.ResponseDomainModel
 import br.com.covid19news.repository.IRepository
-import br.com.covid19news.util.TypeSearch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import kotlin.reflect.KSuspendFunction0
 
 class GenericViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application), IBaseViewModel {
 
     private val TAG = javaClass.simpleName
+
+    private var _filter: String? = null
 
     val responseList = repository.responses
 
@@ -50,54 +52,57 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         viewModelScope.cancel()
     }
 
-    fun onShowData(params: Triple<Boolean, String?, TypeSearch>) {
-        if (params.first)
-            onHideSwipeRefresh()
-
-        onFetchData(params.second, params.third)
+    fun onRefreshStatistics() {
+        onExecuteCall(true, repository::refreshStatisticsAllCountries)
     }
 
-    private fun onFetchData(filter: String?, typeSearch: TypeSearch) {
+    fun onGetStatistics(params: Pair<String?, Boolean>) {
+        _filter = params.first
+        onExecuteCall(params.second, ::getStatisticsWorldOrByCountry)
+    }
+
+    private fun onExecuteCall(value: Boolean, block: KSuspendFunction0<Unit>) {
+        onCheckHideSwipeRefresh(value)
         viewModelScope.launch {
-            onShowProgressBar(true)
-            onCallRepository(filter, typeSearch)
-            onShowProgressBar(false)
-        }
-    }
-
-    private suspend fun onCallRepository(filter: String?, typeSearch: TypeSearch) {
-        withContext(Dispatchers.IO) {
-            try {
-                onChooseOptionSearch(filter, typeSearch)
-            } catch (ex: Throwable) {
-                Timber.tag(TAG)
-                Timber.e(ex)
-                onShowToast(App.getContext().getString(R.string.msg_error, ex.message))
-            }
-        }
-    }
-
-    private suspend fun onChooseOptionSearch(filter: String?, typeSearch: TypeSearch) =
-        when (typeSearch) {
-            TypeSearch.All, TypeSearch.Country -> {
-                filter?.let { value ->
-                    repository.getStatisticsWorldOrByCountry(value).run {
-                        if (this.first) {
-                            this.second?.let {
-                                _response.postValue(it as? ResponseDomainModel)
-                                onShowCardViewItem()
-                            }
-                        }
-                    }
+            withContext(Dispatchers.IO) {
+                onShowProgressBar(true)
+                try {
+                    block.invoke()
+                } catch (ex: Throwable) {
+                    Timber.tag(TAG)
+                    Timber.e(ex)
+                    onShowToast(App.getContext().getString(R.string.msg_error, ex.message))
+                } finally {
+                    onShowProgressBar(false)
                 }
             }
-            TypeSearch.Statistcs -> {
-                repository.refreshStatisticsAllCountries()
+        }
+    }
+
+    private fun onCheckHideSwipeRefresh(value: Boolean) {
+        if (value)
+            onHideSwipeRefresh()
+    }
+
+    private suspend fun getStatisticsWorldOrByCountry() {
+        _filter?.let { value ->
+            repository.getStatisticsWorldOrByCountry(value).run {
+                onSetResponse()
             }
         }
+    }
+
+    private fun Pair<Boolean, Any?>.onSetResponse() {
+        if (this.first) {
+            this.second?.let {
+                _response.postValue(it as? ResponseDomainModel)
+                onShowCardViewItem()
+            }
+        }
+    }
 
     private fun onShowProgressBar(value: Boolean) {
-        _isVisibleProgressBar.value = onIsVisible(value)
+        _isVisibleProgressBar.postValue(onIsVisible(value))
     }
 
     override fun onShowToast(value: String?) {
