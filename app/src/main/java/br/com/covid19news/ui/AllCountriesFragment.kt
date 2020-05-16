@@ -62,7 +62,6 @@ class AllCountriesFragment : Fragment() {
     }
 
     private fun onShowData() {
-        //viewModel.onShowData(Triple(true, null, TypeSearch.Statistcs))
         viewModel.onRefreshStatistics()
     }
 }

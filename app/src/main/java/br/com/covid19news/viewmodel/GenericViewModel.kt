@@ -64,17 +64,18 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     private fun onExecuteCall(value: Boolean, block: KSuspendFunction0<Unit>) {
         onCheckHideSwipeRefresh(value)
         viewModelScope.launch {
-            onShowProgressBar(true)
             withContext(Dispatchers.IO) {
+                onShowProgressBar(true)
                 try {
                     block.invoke()
                 } catch (ex: Throwable) {
                     Timber.tag(TAG)
                     Timber.e(ex)
                     onShowToast(App.getContext().getString(R.string.msg_error, ex.message))
+                } finally {
+                    onShowProgressBar(false)
                 }
             }
-            onShowProgressBar(false)
         }
     }
 
@@ -101,7 +102,7 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     }
 
     private fun onShowProgressBar(value: Boolean) {
-        _isVisibleProgressBar.value = onIsVisible(value)
+        _isVisibleProgressBar.postValue(onIsVisible(value))
     }
 
     override fun onShowToast(value: String?) {

@@ -61,8 +61,7 @@ class App : MultiDexApplication(), Configuration.Provider {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setRequiresDeviceIdle(true)
                 }
-            }
-            .build()
+            }.build()
 
         val repeatingRequest =
             PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.HOURS)

@@ -13,7 +13,9 @@ fun StatisticsRemote.asDatabaseModel(): Array<ResponseEntity> {
     return listResponseRemote.map {
         ResponseEntity(
             country = when (it.country) {
-                TypeSearch.All.name -> App.getContext().getString(R.string.all).onToUpperCase()
+                App.getContext().getString(R.string.all) -> {
+                    App.getContext().getString(R.string.all).onToUpperCase()
+                }
                 else -> it.country?.trim()?.onToUpperCase()
             } ?: it.country.onCheckDataReported(),
             cases = CasesEntity(
