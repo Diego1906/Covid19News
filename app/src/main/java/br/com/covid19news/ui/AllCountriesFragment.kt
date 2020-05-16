@@ -10,7 +10,6 @@ import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentAllCountriesBinding
 import br.com.covid19news.ui.adapter.AllCountriesAdapter
 import br.com.covid19news.ui.adapter.OnclickListener
-import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onNavigate
 import br.com.covid19news.util.onNotifyWithToast
 import br.com.covid19news.viewmodel.GenericViewModel
@@ -63,6 +62,7 @@ class AllCountriesFragment : Fragment() {
     }
 
     private fun onShowData() {
-        viewModel.onShowData(Triple(true, null, TypeSearch.Statistcs))
+        //viewModel.onShowData(Triple(true, null, TypeSearch.Statistcs))
+        viewModel.onRefreshStatistics()
     }
 }

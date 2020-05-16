@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
-import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onNotifyWithToast
 import br.com.covid19news.util.onToUpperCase
 import br.com.covid19news.viewmodel.GenericViewModel
@@ -54,6 +53,8 @@ class EntireWorldFragment : Fragment() {
     }
 
     private fun onShowData() {
-        viewModel.onShowData(Triple(true, TypeSearch.All.name.onToUpperCase(), TypeSearch.All))
+        viewModel.onGetStatistics(
+            Pair(getString(R.string.all).onToUpperCase(), true)
+        )
     }
 }

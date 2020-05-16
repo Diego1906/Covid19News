@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentByCountryBinding
-import br.com.covid19news.util.TypeSearch
 import br.com.covid19news.util.onNotifyWithToast
 import br.com.covid19news.viewmodel.GenericViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,6 +72,6 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun onShowData() {
-        viewModel.onShowData(Triple(false, filter, TypeSearch.Country))
+        viewModel.onGetStatistics(Pair(filter, false))
     }
 }
