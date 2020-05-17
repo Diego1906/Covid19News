@@ -9,7 +9,7 @@ import br.com.covid19news.util.*
 fun StatisticsRemote.mapToDomainModel() = StatisticsDomainModel(
     get = this.get.onCheckDataReported(),
     results = this.results.onCheckDataReported(),
-    listResponse = this.listResponseRemote.map { it.mapToDomainModel() }
+    responses = this.responsesRemote.map { it.mapToDomainModel() }
 )
 
 fun ResponseRemote.mapToDomainModel() = ResponseDomainModel(

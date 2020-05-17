@@ -10,7 +10,7 @@ import br.com.covid19news.remote.dto.StatisticsRemote
 import br.com.covid19news.util.*
 
 fun StatisticsRemote.asDatabaseModel(): Array<ResponseEntity> {
-    return listResponseRemote.map {
+    return responsesRemote.map {
         ResponseEntity(
             country = when (it.country) {
                 App.getContext().getString(R.string.all) -> {

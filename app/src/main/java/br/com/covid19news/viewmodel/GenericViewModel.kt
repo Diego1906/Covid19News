@@ -20,11 +20,9 @@ class GenericViewModel(val repository: IRepository, application: Application) :
     AndroidViewModel(application), IBaseViewModel {
 
     private val TAG = javaClass.simpleName
-
     private var _filter: String? = null
 
-    val responseList = repository.responses
-
+    val responses = repository.responses
     val isNotNetworkConnected = repository.isNotNetworkConnected
 
     private val _response = MutableLiveData<ResponseDomainModel>()
@@ -69,9 +67,7 @@ class GenericViewModel(val repository: IRepository, application: Application) :
                 try {
                     block.invoke()
                 } catch (ex: Throwable) {
-                    Timber.tag(TAG)
-                    Timber.e(ex)
-                    onShowToast(App.getContext().getString(R.string.msg_error, ex.message))
+                    onShowErrorMsg(ex)
                 } finally {
                     onShowProgressBar(false)
                 }
@@ -92,17 +88,21 @@ class GenericViewModel(val repository: IRepository, application: Application) :
         }
     }
 
-    private fun Pair<Boolean, Any?>.onSetResponse() {
-        if (this.first) {
-            this.second?.let {
-                _response.postValue(it as? ResponseDomainModel)
-                onShowCardViewItem()
-            }
+    private fun ResponseDomainModel?.onSetResponse() {
+        this?.let {
+            _response.postValue(it)
+            onShowCardViewItem()
         }
     }
 
     private fun onShowProgressBar(value: Boolean) {
         _isVisibleProgressBar.postValue(onIsVisible(value))
+    }
+
+    private fun onShowErrorMsg(ex: Throwable) {
+        Timber.tag(TAG)
+        Timber.e(ex)
+        onShowToast(App.getContext().getString(R.string.msg_error, ex.message))
     }
 
     override fun onShowToast(value: String?) {

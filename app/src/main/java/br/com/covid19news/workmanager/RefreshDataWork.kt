@@ -12,7 +12,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params), KoinComponent {
 
     companion object {
-        const val WORK_NAME = "RefreshDataWorker "
+        const val WORK_NAME = "RefreshDataWorker"
     }
 
     private val repository by inject<IRepository>()

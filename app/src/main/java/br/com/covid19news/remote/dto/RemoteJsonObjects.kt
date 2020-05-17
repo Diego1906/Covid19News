@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class StatisticsRemote(
     @Json(name = "get") val get: String,
     @Json(name = "results") val results: String,
-    @Json(name = "response") val listResponseRemote: List<ResponseRemote>
+    @Json(name = "response") val responsesRemote: List<ResponseRemote>
 ) : Parcelable
 
 @Parcelize

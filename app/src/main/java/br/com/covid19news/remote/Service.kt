@@ -1,6 +1,8 @@
 package br.com.covid19news.remote
 
 import br.com.covid19news.BuildConfig
+import br.com.covid19news.R
+import br.com.covid19news.application.App
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -15,10 +17,12 @@ class Service : IService {
     private val retrofit: Retrofit
 
     init {
+        val ten = App.getContext().resources.getInteger(R.integer.ten).toLong()
+
         val client = OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(ten, TimeUnit.SECONDS)
+            .writeTimeout(ten, TimeUnit.SECONDS)
+            .readTimeout(ten, TimeUnit.SECONDS)
             .addInterceptor { chain ->
                 val request: Request = chain.request().newBuilder()
                     .addHeader(BuildConfig.HEADER_HOST_NAME, BuildConfig.HEADER_HOST_VALUE)

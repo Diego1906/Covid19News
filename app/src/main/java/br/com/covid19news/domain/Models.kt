@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class StatisticsDomainModel(
     val get: String,
     val results: String,
-    val listResponse: List<ResponseDomainModel>
+    val responses: List<ResponseDomainModel>
 ) : Parcelable
 
 @Parcelize

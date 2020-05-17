@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:listData="@{viewModel.responseList}"
+                app:listData="@{viewModel.responses}"
                 tools:listitem="@layout/item_list_countries" />
 
             <include
