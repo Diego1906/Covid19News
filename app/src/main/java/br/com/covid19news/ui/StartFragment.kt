@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.util.onNavigate
-import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.util.onShowNotify
 import br.com.covid19news.viewmodel.StartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +20,7 @@ class StartFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_start, container, false)
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
+            it?.onShowNotify(requireActivity(), viewModel)
         })
 
         setHasOptionsMenu(true)

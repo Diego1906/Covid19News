@@ -11,7 +11,7 @@ import br.com.covid19news.databinding.FragmentAllCountriesBinding
 import br.com.covid19news.ui.adapter.AllCountriesAdapter
 import br.com.covid19news.ui.adapter.OnclickListener
 import br.com.covid19news.util.onNavigate
-import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.util.onShowNotify
 import br.com.covid19news.viewmodel.GenericViewModel
 import kotlinx.android.synthetic.main.fragment_all_countries.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -38,7 +38,7 @@ class AllCountriesFragment : Fragment() {
         binding.swipeRefreshAllCountries.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
+            it?.onShowNotify(requireActivity(), viewModel)
         })
 
         viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {

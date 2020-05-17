@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentEntireWorldBinding
-import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.util.onShowNotify
 import br.com.covid19news.util.onToUpperCase
 import br.com.covid19news.viewmodel.GenericViewModel
 import kotlinx.android.synthetic.main.fragment_entire_world.*
@@ -27,7 +27,7 @@ class EntireWorldFragment : Fragment() {
         binding.swipeRefreshEntireWorld.setOnRefreshListener { onShowData() }
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
+            it?.onShowNotify(requireActivity(), viewModel)
         })
 
         viewModel.swipeIsRefreshing.observe(viewLifecycleOwner, Observer {
@@ -53,8 +53,6 @@ class EntireWorldFragment : Fragment() {
     }
 
     private fun onShowData() {
-        viewModel.onGetStatistics(
-            Pair(getString(R.string.all).onToUpperCase(), true)
-        )
+        viewModel.onGetStatistics(Pair(getString(R.string.all).onToUpperCase(), true))
     }
 }

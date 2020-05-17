@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.covid19news.R
 import br.com.covid19news.databinding.FragmentByCountryBinding
-import br.com.covid19news.util.onNotifyWithToast
+import br.com.covid19news.util.onShowNotify
 import br.com.covid19news.viewmodel.GenericViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +30,7 @@ class ByCountryFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.spinnerCountry.onItemSelectedListener = this
 
         viewModel.toast.observe(viewLifecycleOwner, Observer {
-            it?.onNotifyWithToast(Pair(requireContext(), viewModel))
+            it?.onShowNotify(requireActivity(), viewModel)
         })
 
         viewModel.isNotNetworkConnected.observe(viewLifecycleOwner, Observer {
