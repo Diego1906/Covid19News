@@ -3,7 +3,6 @@ package br.com.covid19news.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import br.com.covid19news.R
 import br.com.covid19news.application.App
 import br.com.covid19news.data.AppDatabase
 import br.com.covid19news.domain.ResponseDomainModel
@@ -14,7 +13,9 @@ import br.com.covid19news.util.onIsNetworkConnected
 
 class Repository(private val service: IService, private val database: AppDatabase) : IRepository {
 
-    private val zero = App.getContext().resources.getInteger(R.integer.zero)
+    companion object {
+        private const val ZERO = 0
+    }
 
     private val _isNotNetworkConnected = MutableLiveData(false)
     override val isNotNetworkConnected
@@ -26,7 +27,7 @@ class Repository(private val service: IService, private val database: AppDatabas
         }
 
     override suspend fun refreshStatisticsAllCountries() {
-        if (database.dao.getCountTotalResult() == zero) {
+        if (database.dao.getCountTotalResult() == ZERO) {
             if (App.getContext().onIsNetworkConnected())
                 onRefreshDatabase()
             else
@@ -35,14 +36,13 @@ class Repository(private val service: IService, private val database: AppDatabas
     }
 
     override suspend fun onRefreshDatabase() {
-        val statisticsRemote = service.getService().getStatisticsAllCountries()
-        database.dao.insertAll(*statisticsRemote.asDatabaseModel())
+        database.dao.insertAll(*service.getService().getStatisticsAllCountries().asDatabaseModel())
     }
 
     override suspend fun getStatisticsWorldOrByCountry(filter: String): ResponseDomainModel? {
         var response: ResponseDomainModel? = null
         when (database.dao.getCountResult(filter)) {
-            zero -> {
+            ZERO -> {
                 if (App.getContext().onIsNetworkConnected())
                     response = getReponseService(filter)
                 else
@@ -56,7 +56,7 @@ class Repository(private val service: IService, private val database: AppDatabas
     private suspend fun getReponseService(filter: String): ResponseDomainModel {
         return service.getService().getStatisticsWorldOrByCountry(filter)
             .mapToDomainModel()
-            .responses[zero]
+            .responses[ZERO]
     }
 
     private fun getResponseDatabase(filter: String): ResponseDomainModel {

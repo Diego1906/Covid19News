@@ -5,7 +5,10 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "currentstatistics", indices = [Index(value = ["country"], unique = true)])
+@Entity(
+    tableName = ConfigDatabase.TABLE_NAME,
+    indices = [Index(value = [ConfigDatabase.INDEX_NAME], unique = true)]
+)
 data class ResponseEntity(
     @PrimaryKey var country: String,
     @Embedded(prefix = "cases_") var cases: CasesEntity,
