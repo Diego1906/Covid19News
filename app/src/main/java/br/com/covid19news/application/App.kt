@@ -3,7 +3,8 @@ package br.com.covid19news.application
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import androidx.work.Configuration
-import br.com.covid19news.di.appModule
+import br.com.covid19news.di.dataModule
+import br.com.covid19news.di.viewModelModule
 import br.com.covid19news.workmanager.SetupWork
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +35,7 @@ class App : MultiDexApplication(), Configuration.Provider {
 
         startKoin {
             androidContext(this@App)
-            modules(appModule)
+            modules(viewModelModule, dataModule)
         }
 
         setContext(applicationContext)

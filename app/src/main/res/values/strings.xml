@@ -27,7 +27,6 @@
     <string name="search">Pesquisar</string>
     <string name="msg_error">Houve uma falha\nDetalhes: %s</string>
     <string name="select_one_country">Selecione um País:</string>
-    <string name="database_name">covid_database</string>
 
     <!-- List of the countries used in the spinner -->
     <string-array name="listCountries">

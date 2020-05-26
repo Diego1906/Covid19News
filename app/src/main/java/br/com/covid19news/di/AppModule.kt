@@ -11,9 +11,12 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val appModule = module {
+val viewModelModule = module {
     viewModel { StartViewModel() }
     viewModel { GenericViewModel(repository = get(), application = androidApplication()) }
+}
+
+val dataModule = module {
     single<IRepository> {
         Repository(
             service = get(),
