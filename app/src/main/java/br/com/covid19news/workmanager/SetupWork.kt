@@ -7,8 +7,13 @@ import java.util.concurrent.TimeUnit
 
 class SetupWork {
 
+    /*
+     * This function is to configure recurring database update work in conjunction with WorkManager
+     */
     companion object {
+
         fun setupRecurringWork() {
+            // These are constraints to request periodic work
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.UNMETERED)
                 .setRequiresBatteryNotLow(true)
@@ -19,11 +24,13 @@ class SetupWork {
                     }
                 }.build()
 
+            // This object is configured with the execution interval
             val repeatingRequest =
                 PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.HOURS)
                     .setConstraints(constraints)
                     .build()
 
+            // Here is configured the WorkManager
             WorkManager.getInstance(App.getContext()).enqueueUniquePeriodicWork(
                 RefreshDataWorker.WORK_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,

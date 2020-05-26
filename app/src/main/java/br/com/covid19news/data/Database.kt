@@ -19,7 +19,7 @@ abstract class AppDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context,
                         AppDatabase::class.java,
-                        "covid_database"
+                        ConfigDatabase.DATABASE_NAME
                     )
                         .fallbackToDestructiveMigration()
                         .build()

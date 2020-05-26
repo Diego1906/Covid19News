@@ -9,16 +9,16 @@ import androidx.room.Query
 @Dao
 interface StatisticsDao {
 
-    @Query("SELECT country, day, time, MAX(cases_newer) as cases_newer, cases_active, cases_critical, cases_recovered, MAX(cases_total) as cases_total, MAX(deaths_newer) as deaths_newer, deaths_total, tests_total FROM currentstatistics GROUP BY country, day ORDER BY country")
+    @Query("${Crud.SELECT_ALL_COLUMNS} ${Crud.GROUP_BY} ${Crud.ORDER_BY}")
     fun getAll(): LiveData<List<ResponseEntity>>
 
-    @Query("SELECT country, day, time, MAX(cases_newer) as cases_newer, cases_active, cases_critical, cases_recovered, MAX(cases_total) as cases_total, MAX(deaths_newer) as deaths_newer, deaths_total, tests_total FROM currentstatistics WHERE country = :country GROUP BY country, day ORDER BY country")
+    @Query("${Crud.SELECT_ALL_COLUMNS} ${Crud.WHERE} ${Crud.GROUP_BY} ${Crud.ORDER_BY}")
     fun getByPrimaryKey(country: String): ResponseEntity
 
-    @Query("SELECT count(*) FROM currentstatistics WHERE country = :country ")
+    @Query("${Crud.SELECT_COUNT} ${Crud.WHERE}")
     fun getCountResult(country: String): Int
 
-    @Query("SELECT count(*) FROM currentstatistics")
+    @Query(Crud.SELECT_COUNT)
     fun getCountTotalResult(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

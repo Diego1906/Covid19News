@@ -56,8 +56,9 @@ fun onGetDateCalendar(): String {
 }
 
 fun Context.onIsNetworkConnected(): Boolean {
-    val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
-    return cm?.activeNetworkInfo?.isConnectedOrConnecting == true
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+    return connectivityManager?.activeNetworkInfo?.isConnectedOrConnecting == true
 }
 
 fun Fragment.onNavigate(directions: NavDirections) {
