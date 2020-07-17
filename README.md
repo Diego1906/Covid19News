@@ -43,10 +43,15 @@ API utilizada [Covid-19 API](https://api-sports.io/documentation/covid-19)
   -
   - [RecyclerView](https://developer.android.com/guide/topics/ui/layout/recyclerview) é utilizada para criar listas de informações, objetos, imagens que serão apresentados na tela
   - [Material Design](https://material.io/) é a orientação de código e projeto oficial do Google
+  - [ConstraintLayout](https://developer.android.com/training/constraint-layout) permite você criar layouts grandes e complexos com uma hierarquia de visão plana (sem grupos de visão aninhados)
   
 - Design de Arquitetura e Padrões
   - 
   - [MVVM](https://developer.android.com/jetpack/docs/guide) é o padrão de design de arquitetura de software que a Google indica para os novos desenvolvimento. Os novos componentes de arquitetura já são lançados com suporte a esse tipo de padrão
   - [Repository](https://proandroiddev.com/the-real-repository-pattern-in-android-efba8662b754) é estratégia para abstrair o acesso aos dados. Ele é composto pelo código em uma aplicação que lida com o armazenamento e a recuperação de dados. [Mais detalhes](https://makingloops.com/why-should-you-use-the-repository-pattern/).
   
-
+- Princípios do SOLID utilizados
+  - 
+  - [Single Responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle) (SRP) principio da Responsabilidade Única
+  - [Interface Segregation](https://www.webcitation.org/6AL2qqIGg?url=http://www.objectmentor.com/resources/articles/isp.pdf) (ISP) princípio da Segregação da Interface
+  - [Dependency Inversion](https://web.archive.org/web/20110714224327/http://www.objectmentor.com/resources/articles/dip.pdf) (DIP) princípio da inversão da dependência
